@@ -21,6 +21,9 @@ namespace Backend.Injection
         public static void Injections(IServiceCollection services)
         {
             
+            var serviceProvider = services.BuildServiceProvider();
+            var _settings = serviceProvider.GetService<IOptions<AppSettings>>()?.Value;
+
             services
                 .AddScoped<IBaseRepository<RefreshToken>, BaseRepository<RefreshToken>>()
                 .AddScoped<IBaseRepository<User>, BaseRepository<User>>();
@@ -38,8 +41,6 @@ namespace Backend.Injection
                .AddOptions()
                .AddHttpContextAccessor();
 
-            var serviceProvider = services.BuildServiceProvider();
-            var _settings = serviceProvider.GetService<IOptions<AppSettings>>()?.Value;
 
             if (!string.IsNullOrEmpty(_settings?.AUTH_SECRET))
             {
