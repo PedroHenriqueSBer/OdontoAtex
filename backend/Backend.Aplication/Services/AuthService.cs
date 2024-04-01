@@ -35,7 +35,7 @@ namespace Backend.Aplication.Services
             var user = await _repository.Get(u => u.Email == input.Email);
             if(user == null)
                 return ResultService<LoginViewModel>.Fail("Usuário não encontrado");
-            if(user.Password != input.Password)
+            if(user.Password != CryptoService.Encrypt(input.Password))
                 return ResultService<LoginViewModel>.Fail("Senha Incorreta");
 
 
@@ -74,7 +74,7 @@ namespace Backend.Aplication.Services
             {
                 Name = input.Name,
                 Email = input.Email,
-                Password = input.Password,
+                Password = CryptoService.Encrypt(input.Password),
             };
 
             user.Id = await _repository.Insert(user);

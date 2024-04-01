@@ -85,8 +85,8 @@ namespace Backend.Infra.Data.Migrations
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             Disabled = false,
                             Email = "adm@adm.com",
-                            Name = "AdmUser",
-                            Password = "senha forte"
+                            Name = "Ademir",
+                            Password = "b9dTRAtfpjCeutoajD8pSw=="
                         });
                 });
 

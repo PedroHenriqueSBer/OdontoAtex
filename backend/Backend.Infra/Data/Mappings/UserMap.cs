@@ -25,8 +25,8 @@ namespace Backend.Infra.Data.Mappings
                     Disabled = false,
                     Email = "adm@adm.com",
                     Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                    Password = "senha forte",
-                    Name = "AdmUser",
+                    Password = "b9dTRAtfpjCeutoajD8pSw==", //senha forte
+                    Name = "Ademir",
                 }
             });
         }
