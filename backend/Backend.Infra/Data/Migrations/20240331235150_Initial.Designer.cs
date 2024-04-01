@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Infra.Data.Migrations
 {
     [DbContext(typeof(MysqlContext))]
-    [Migration("20240330163222_Initial")]
+    [Migration("20240331235150_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -81,6 +81,16 @@ namespace Backend.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                            Disabled = false,
+                            Email = "adm@adm.com",
+                            Name = "AdmUser",
+                            Password = "senha forte"
+                        });
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.RefreshToken", b =>

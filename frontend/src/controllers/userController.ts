@@ -1,6 +1,6 @@
 import { ISigninInputModels, ISignupInputModels } from "../types/inputModels";
 import { ILoginViewModel } from "../types/viewModels";
-import { api } from "./api";
+import { api } from "../service/api";
 
 const Login = (input: ISigninInputModels) => 
   new Promise<ILoginViewModel | string>((resolve,reject)=>

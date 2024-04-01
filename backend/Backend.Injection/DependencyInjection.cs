@@ -18,7 +18,7 @@ namespace Backend.Injection
 {
     public class DependencyInjection
     {
-        public static void Injections(IServiceCollection services)
+        public static void Injections(IServiceCollection services, string connectionString)
         {
             
             var serviceProvider = services.BuildServiceProvider();
@@ -33,7 +33,7 @@ namespace Backend.Injection
 
             services.AddDbContext<MysqlContext>(options =>
             {
-                options.UseMySQL("Server=localhost;Port=3306;Database=Unidonto;Uid=root;Pwd=1234;");
+                options.UseMySQL(connectionString);
                 options.EnableSensitiveDataLogging();
             }, ServiceLifetime.Scoped);
 

@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-DependencyInjection.Injections(builder.Services);
+DependencyInjection.Injections(builder.Services, builder.Configuration.GetConnectionString("Mysql") ?? "");
 
 builder.Services.AddCors(options =>
 {

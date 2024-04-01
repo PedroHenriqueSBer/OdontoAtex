@@ -59,6 +59,11 @@ namespace Backend.Infra.Data.Migrations
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Disabled", "DisabledAt", "Email", "Name", "Password" },
+                values: new object[] { new Guid("00000000-0000-0000-0000-000000000001"), false, null, "adm@adm.com", "AdmUser", "senha forte" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_RefreshTokens_CreatedById",
                 table: "RefreshTokens",

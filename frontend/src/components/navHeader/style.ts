@@ -20,14 +20,15 @@ export const Header = styled.header`
 
 export const ButtonHeader = styled.button`
   gap: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 4px;
-  font-size: 0.78rem;
+  padding: 0.6rem;
+  border-radius: 0.3rem;
+  font-size: 0.83rem;
   color: ${({ theme }) => theme.colors.white};
-  background-color: ${({ theme }) => theme.colors.secondaryDark};
-  transition: 300ms ease-in-out;
+  background-color: ${({ theme }) => theme.colors.primary};
+  transition: 400ms ease-in-out;
   &:hover{
-    background-color: #5a7497;
+    box-shadow: 0 0 1rem #0000002f;
+    background-color: ${({ theme }) => theme.colors.secondaryDark};
   }
 `
 
@@ -39,18 +40,23 @@ export const MenuItemContent = styled.div`
   border-radius: 0.3rem;
   box-shadow: 0 0 1rem #00000017;
   margin-right: 0.5rem;
+  margin-top: -0.5rem;
 `
 
-export const MenuItemButton = styled.button<{warning?: boolean}>`
+interface MenuItemButtonProps {
+  variant: 'warning' | 'default'
+}
+
+export const MenuItemButton = styled.button<MenuItemButtonProps>`
   display: flex;
   align-items: center;
   padding: 0.6rem;
   gap: 0.5rem;
   justify-content: flex-start;
   width: 100%;
-  color: ${({warning, theme})=> warning? '#b329298c' : theme.colors.text};
+  color: ${({variant, theme})=> variant === "warning"? '#b329298c' : theme.colors.text};
   &:hover{
-    background: ${({warning, theme})=> warning? '#ff20200a' : theme.colors.background};
+    background: ${({variant, theme})=> variant === "warning"? '#ff20200a' : theme.colors.background};
   }
   &.first{
     border-radius: 0.3rem 0.3rem 0 0;

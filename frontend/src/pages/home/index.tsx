@@ -5,7 +5,6 @@ export const Home = () => {
   return (
     <Containter>
       <NavHeader />
-      Home Criada!
     </Containter>
   )
 }

@@ -5,10 +5,13 @@ import { Dropdown } from '@mui/base/Dropdown';
 import { MenuButton } from '@mui/base/MenuButton';
 import { Menu } from '@mui/base/Menu';
 import { useAuth } from "../../context/useAuth";
+import { useNavigate } from "react-router-dom";
 var Unifenas = require('./../../assets/unifenas.png')
 var UserImg = require('./../../assets/userImage.png')
 
 export const NavHeader = () => {
+
+  const navigate = useNavigate()
 
   const { logout } = useAuth()
 
@@ -16,26 +19,26 @@ export const NavHeader = () => {
     <>
       <Header>
         <div>
-          <button>
+          <button onClick={() => navigate('/Home')}>
             <img className="logo" src={Unifenas} alt="Logo da Unifenas" />
           </button>
           <ButtonHeader>
-            <UserRound width={18} height={18} />
+            <UserRound width={19} height={19} />
             Pacientes
           </ButtonHeader>
           <ButtonHeader >
-            <Calendar width={18} height={18} />
+            <Calendar width={19} height={19} />
             Agenda
           </ButtonHeader>
         </div>
         <div>
-          <IconButton IconProps={{ size: 18 }} Icon={Bell} />
+          <IconButton IconProps={{ size: 16 }} Icon={Bell} />
           <Dropdown>
             <MenuButton><img src={UserImg} alt="" /></MenuButton>
             <Menu>
               <MenuItemContent>
-                <MenuItemButton className="first"><User width={16} height={16}/>Perfill</MenuItemButton>
-                <MenuItemButton className="last" warning onClick={()=>{logout()}}><LogOut width={16} height={16}/>Sair</MenuItemButton>
+                <MenuItemButton className="first" variant="default"><User width={16} height={16} />Perfill</MenuItemButton>
+                <MenuItemButton className="last" onClick={()=>{logout()}} variant="warning"><LogOut width={16} height={16}/>Sair</MenuItemButton>
               </MenuItemContent>
             </Menu>
           </Dropdown>

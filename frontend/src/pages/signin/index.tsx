@@ -25,7 +25,7 @@ export const Signin = () => {
 
   const schema = yup.object<ISigninInputModels>().shape({
     email: yup.string().email("Email inválido").required("Email é obrigatório"),
-    password: yup.string().min(6, "mínimo 6 caracteres").required("Nome é obrigatório")
+    password: yup.string().min(6, "mínimo 6 caracteres").required("Senha é obrigatório")
   })
 
   const [defaultValues] = useState<ISigninInputModels>({

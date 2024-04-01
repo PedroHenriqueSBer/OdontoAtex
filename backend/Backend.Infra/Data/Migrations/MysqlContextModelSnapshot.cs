@@ -78,6 +78,16 @@ namespace Backend.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                            Disabled = false,
+                            Email = "adm@adm.com",
+                            Name = "AdmUser",
+                            Password = "senha forte"
+                        });
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.RefreshToken", b =>
