@@ -1,27 +1,21 @@
-import { Containter, Content } from "./style"
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  TextField
-} from '@mui/material'
 import { useEffect, useState } from "react"
 import { useForm, Controller } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ISignupInputModels } from "../../types/inputModels"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../context/useAuth"
-import { AlertCircle } from "lucide-react"
 import { authController } from "../../controllers/authController"
 import { useLoading } from "../../context/useLoading"
+import { Button, Container, Content, Fieldset, Helpertext, Main, Sidebar } from './style';
+import { Eye, EyeOff, Info, Lock, Mail, User } from 'lucide-react';
+import { Popup } from '../../components/popup';
 
 export const Signup = () => {
 
   const [isOpenDialog,setIsOpenDialog] = useState(false)
   const [messageApi,setMessageApi] = useState<string>("")
+  const [showPassowrd, setShowPassowrd] = useState<boolean>(false);
 
   const { 
     isTokenValid,
@@ -80,72 +74,92 @@ export const Signup = () => {
 
 
   return (
-    <Containter>
-      <Content onSubmit={handleSubmit(handleSignup)}>
-        <h2>Signup</h2>
-        <Controller 
-          name="email"
-          control={control}
-          render={({field})=>
-            <TextField 
-              size="small" 
-              placeholder="Email"
-              error={!!errors.email?.message}
-              helperText={errors.email?.message} 
-              {...field}
+    <Container>
+      <Content>
+        <Sidebar>
+          <h1>BEM - VINDO</h1>
+          <h2><span>INSC</span>REVA-SE</h2>
+          <Button onClick={() => navigate('/')}>Fazer Login</Button>
+        </Sidebar>
+        <Main onSubmit={handleSubmit(handleSignup)}>
+          <h1>CADASTRAR-SE</h1>
+          <div className="content">
+            <Controller 
+              control={control}
+              name="name"
+              render={({field})=>
+                <>
+                  <Fieldset error={!!errors.name?.message}>
+                    <div>
+                      <User width={18} height={18} />
+                    </div>
+                    <input placeholder="Nome" {...field} type="text" />
+                  </Fieldset>
+                  {!!errors.name?.message &&
+                    <Helpertext>{errors.name?.message}</Helpertext>
+                  }
+                </>
+
+              }
             />
-          }
-        />
+          </div>
+          <div className="content">
+            <Controller 
+              control={control}
+              name="email"
+              render={({field})=>
+                <>
+                  <Fieldset error={!!errors.email?.message}>
+                    <div>
+                      <Mail width={18} height={18} />
+                    </div>
+                    <input placeholder="Email" {...field} type="text" />
+                  </Fieldset>
+                  {!!errors.email?.message &&
+                    <Helpertext>{errors.email?.message}</Helpertext>
+                  }
+                </>
 
-        <Controller 
-          name="name"
-          control={control}
-          render={({field})=>
-            <TextField 
-              size="small" 
-              placeholder="Nome"
-              error={!!errors.name?.message}
-              helperText={errors.name?.message} 
-              {...field}
+              }
             />
-          }
-        />
+          </div>
+          <div className="content">
+            <Controller 
+              control={control}
+              name="password"
+              render={({field})=>
+                <>
+                  <Fieldset error={!!errors.password?.message}>
+                    <div>
+                      <Lock width={18} height={18} />
+                    </div>
+                    <input placeholder="Senha" {...field} type={showPassowrd? 'text' : 'password'} />
+                    <button type="button" onClick={()=>setShowPassowrd(!showPassowrd)}>
+                      {showPassowrd ? <Eye width={18} height={18}/> : <EyeOff width={18} height={18}/>}
+                    </button>
+                  </Fieldset>
+                  {!!errors.password?.message &&
+                    <Helpertext>{errors.password?.message}</Helpertext>
+                  }
+                </>
 
-        <Controller 
-          name="password"
-          control={control}
-          render={({field})=>
-            <TextField 
-              size="small" 
-              placeholder="Senha"
-              type="password"
-              error={!!errors.password?.message}
-              helperText={errors.password?.message} 
-              {...field}
+              }
             />
-          }
-        />
-
-
-        <Button type="submit">Criar Conta</Button>
-        <Link to='/'>Já tenho conta!</Link>
+          </div>
+          <Button type="submit" primary>Cadastrar</Button>
+        </Main>
       </Content>
-      <Dialog
-        open={isOpenDialog}
-        onClose={()=>setIsOpenDialog(false)}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title" style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
-          <AlertCircle/> Erro ao Logar
-        </DialogTitle>
-        <DialogContent>
-          {messageApi}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={()=>setIsOpenDialog(false)}>Confirmar</Button>
-        </DialogActions>
-      </Dialog>
-    </Containter>
+      <Popup 
+        isOpen={isOpenDialog}
+        onClose={()=>setIsOpenDialog(!isOpenDialog)}
+        onConfirm={()=>setIsOpenDialog(!isOpenDialog)}
+        onDenied={()=>setIsOpenDialog(!isOpenDialog)}
+        title='Erro'
+        icon={Info}
+        description={messageApi}
+        error
+        isNotDenied
+      />
+    </Container>
   )
 }

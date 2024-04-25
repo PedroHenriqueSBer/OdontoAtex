@@ -9,3 +9,8 @@ export interface IResultServiceProps<T> {
   message: string,
   error: boolean
 }
+
+export interface IModalProps {
+  isOpen: boolean
+  onClose: () => void
+}
