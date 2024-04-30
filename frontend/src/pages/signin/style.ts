@@ -8,38 +8,46 @@ export const Container = styled.div`
   align-items: center;
 `
 export const Content = styled.div`
-  display: flex;
-  box-shadow: 0 0 20px #00000038;
-  height: fit-content;
-  border-radius: 1rem;
-  background-color: ${({theme: {colors: {white}}}) => white};
+  @media (min-width: 800px) {
+    display: flex;
+    box-shadow: 0 0 20px #00000038;
+    height: fit-content;
+    border-radius: 1rem;
+    background-color: ${({theme: {colors: {white}}}) => white};
+  }
 `
 
 export const Sidebar = styled.div`
-  background-color: #E9F2F1;
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  padding: 4rem 2rem;
-  border-top-left-radius: 1rem;
-  border-bottom-left-radius: 1rem;
-  h1{
-    margin: 0;
-    padding: 0;
-    color: ${({theme: {colors: {primary}}}) => primary};
-  }
-  h2{
-    padding: 0;
-    margin: 0;
-    color: ${({theme: {colors: {primary}}}) => primary};
-    span{
-      border-bottom: 2px solid;
+  display: none;
+  @media (min-width: 800px) {
+    background-color: #E9F2F1;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    padding: 4rem 2rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    h1{
+      margin: 0;
+      padding: 0;
+      color: ${({theme: {colors: {primary}}}) => primary};
+    }
+    h2{
+      padding: 0;
+      margin: 0;
+      color: ${({theme: {colors: {primary}}}) => primary};
+      span{
+        border-bottom: 2px solid;
+      }
     }
   }
 `
 
 export const Main = styled.form`
-  padding: 2rem 6rem;
+  padding: 2rem 1rem;
+  @media (min-width: 800px) {
+    padding: 2rem 6rem;
+  }
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -49,11 +57,20 @@ export const Main = styled.form`
     font-weight: 300;
     letter-spacing: 0.3rem;
     color: ${({theme: {colors: {primary}}}) => primary};
+    @media (max-width: 800px) {
+      font-size: 1.7rem;
+    }
   }
   .content{
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
+  }
+  .btnContent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
   }
 `
 
@@ -76,9 +93,15 @@ export const Button = styled.button<{primary?: boolean}>`
     box-shadow: 0 0 5px #00000060;
     filter: brightness(0.99);
   }
+  &.mobile{
+    @media (min-width: 800px) {
+      display: None;
+    }
+  }
 `
 
 export const Fieldset = styled.fieldset<{error?: boolean}>`
+  background-color: ${({theme: {colors: {white}}}) => white};
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -95,6 +118,7 @@ export const Fieldset = styled.fieldset<{error?: boolean}>`
     width: 100%;
     border: none;
     font-size: 0.8rem;
+    background: none;
   }
 `
 

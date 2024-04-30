@@ -8,7 +8,7 @@ import { useAuth } from "../../context/useAuth";
 import { useLoading } from "../../context/useLoading";
 import { authController } from "../../controllers/authController";
 import { Button, ButtonLink, Container, Content, Fieldset, Helpertext, Main, Sidebar } from "./style";
-import { Eye, EyeOff, Info, Lock, User } from "lucide-react";
+import { Eye, EyeOff, Info, Lock, Mail, User } from "lucide-react";
 import { Popup } from "../../components/popup";
 var Unifenas = require('./../../assets/unifenas.png')
 
@@ -84,9 +84,9 @@ export const Signin = () => {
                 <>
                   <Fieldset error={!!errors.email?.message}>
                     <div>
-                      <User width={18} height={18} />
+                      <Mail width={18} height={18} />
                     </div>
-                    <input {...field} type="text" />
+                    <input {...field} type="text" placeholder="Email" />
                   </Fieldset>
                   {!!errors.email?.message &&
                     <Helpertext>{errors.email?.message}</Helpertext>
@@ -106,7 +106,7 @@ export const Signin = () => {
                     <div>
                       <Lock width={18} height={18} />
                     </div>
-                    <input {...field} type={showPassowrd? 'text' : 'password'} />
+                    <input {...field} placeholder="Senha" type={showPassowrd? 'text' : 'password'} />
                     <button type="button" onClick={()=>setShowPassowrd(!showPassowrd)}>
                       {showPassowrd ? <Eye width={18} height={18}/> : <EyeOff width={18} height={18}/>}
                     </button>
@@ -121,14 +121,17 @@ export const Signin = () => {
             
             <ButtonLink type="button">Redefinir Senha?</ButtonLink>
           </div>
-          <Button type="submit" primary>Entrar</Button>
+          <div className="btnContent">
+            <Button type="submit" primary>Entrar</Button>
+            <Button type="button" className="mobile" onClick={()=>navigate('/signup')}>Criar Conta</Button>
+          </div>
         </Main>
       </Content>
       <Popup 
         isOpen={isOpenDialog}
-        onClose={()=>setIsOpenDialog(!isOpenDialog)}
-        onConfirm={()=>setIsOpenDialog(!isOpenDialog)}
-        onDenied={()=>setIsOpenDialog(!isOpenDialog)}
+        onClose={()=>{setIsOpenDialog(!isOpenDialog); setMessageApi('')}}
+        onConfirm={()=>{setIsOpenDialog(!isOpenDialog); setMessageApi('')}}
+        onDenied={()=>{setIsOpenDialog(!isOpenDialog); setMessageApi('')}}
         title='Erro'
         icon={Info}
         description={messageApi}

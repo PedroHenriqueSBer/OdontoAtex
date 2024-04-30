@@ -146,14 +146,17 @@ export const Signup = () => {
               }
             />
           </div>
-          <Button type="submit" primary>Cadastrar</Button>
+          <div className="btnContent">
+            <Button type="submit" primary>Cadastrar</Button>
+            <Button type="button" className="mobile" onClick={() => navigate('/')}>Entrar</Button>
+          </div>
         </Main>
       </Content>
       <Popup 
         isOpen={isOpenDialog}
-        onClose={()=>setIsOpenDialog(!isOpenDialog)}
-        onConfirm={()=>setIsOpenDialog(!isOpenDialog)}
-        onDenied={()=>setIsOpenDialog(!isOpenDialog)}
+        onClose={()=>{setIsOpenDialog(!isOpenDialog); setMessageApi('')}}
+        onConfirm={()=>{setIsOpenDialog(!isOpenDialog); setMessageApi('')}}
+        onDenied={()=>{setIsOpenDialog(!isOpenDialog); setMessageApi('')}}
         title='Erro'
         icon={Info}
         description={messageApi}

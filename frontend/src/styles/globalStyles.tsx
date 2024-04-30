@@ -38,6 +38,8 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
     margin: 0;
     padding: 0;
+    min-width: 320px;
+    overflow: auto;
     background-color: ${({theme}) => theme.colors.background};
   }
 
