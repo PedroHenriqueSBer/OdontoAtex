@@ -8,9 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { Button, IconButton } from "@mui/material";
 import { TypeUser } from "../../types/enum";
 import { useTheme } from "styled-components";
-var Unifenas = require('./../../assets/unifenas.png')
-var Icon = require('./../../assets/icon.png')
-var UserImg = require('./../../assets/userImage.png')
 
 export const NavHeader = () => {
 
@@ -46,7 +43,7 @@ export const NavHeader = () => {
       <Header>
         <div className="desktop">
           <button onClick={() => navigate('/home')}>
-            <img className="logo" src={Unifenas} alt="Logo da Unifenas" />
+            <img className="logo" src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/TypeUser/frontend/src/assets/unifenas.png?raw=true" alt="Logo da Unifenas" />
           </button>
           {options.filter(o => o.enable).map(({icon: Icon,name,route}) => 
             <Button style={{gap: '0.4rem'}} onClick={()=>navigate(route)}>
@@ -57,7 +54,7 @@ export const NavHeader = () => {
         </div>
         <div className="mobile">
           <button onClick={() => navigate('/home')}>
-            <img className="logo" src={Icon} alt="Logo da BiteByte" />
+            <img className="logo" src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/TypeUser/frontend/src/assets/icon.png?raw=true" alt="Logo da BiteByte" />
           </button>
         </div>
         <div>
@@ -65,7 +62,7 @@ export const NavHeader = () => {
             <Bell width={19} height={19} />
           </IconButton>
           <Dropdown>
-            <MenuButton><img src={UserImg} alt="" /></MenuButton>
+            <MenuButton><img src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/TypeUser/frontend/src/assets/userImage.png?raw=true" alt="" /></MenuButton>
             <Menu>
               <MenuItemContent>
                 <MenuItemButton className="first" variant="default"><User width={16} height={16} />Perfill</MenuItemButton>
