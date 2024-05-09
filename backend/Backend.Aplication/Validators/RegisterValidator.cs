@@ -17,10 +17,9 @@ namespace Backend.Aplication.Validators
                 .NotEmpty()
                 .EmailAddress();
 
-            RuleFor(x => x.Password)
+            RuleFor(x => x.type)
                 .NotNull()
-                .NotEmpty()
-                .MinimumLength(6);
+                .NotEmpty();
 
             RuleFor(x => x.Name)
                 .NotNull()

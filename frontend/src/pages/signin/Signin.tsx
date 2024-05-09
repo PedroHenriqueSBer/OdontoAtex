@@ -8,9 +8,8 @@ import { useAuth } from "../../context/useAuth";
 import { useLoading } from "../../context/useLoading";
 import { authController } from "../../controllers/authController";
 import { Button, ButtonLink, Container, Content, Fieldset, Helpertext, Main, Sidebar } from "./style";
-import { Eye, EyeOff, Info, Lock, Mail, User } from "lucide-react";
+import { Eye, EyeOff, Info, Lock, Mail } from "lucide-react";
 import { Popup } from "../../components/popup";
-var Unifenas = require('./../../assets/unifenas.png')
 
 export const Signin = () => {
 
@@ -46,7 +45,7 @@ export const Signin = () => {
 
   useEffect(() => {
     if (isTokenValid)
-      navigate('/Home');
+      navigate('/home');
   }, [isTokenValid, navigate]);
 
   useEffect(() => {

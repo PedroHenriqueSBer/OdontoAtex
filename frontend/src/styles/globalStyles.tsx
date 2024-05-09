@@ -2,8 +2,9 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`	
   *{
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif !important;
     font-weight: 500;
+    max-width: 100%;
     ::-webkit-scrollbar {
       width: 8px;
       background-color: ${({ theme }) => theme.colors.white};
@@ -21,9 +22,7 @@ export const GlobalStyle = createGlobalStyle`
       background-color: ${({ theme }) => theme.colors.primary};
       border-radius: 10px;
     }
-    font-family: "Futura PT", "Roboto", sans-serif !important;
   }
-
 
   input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 30px ${({theme})=> theme.colors.white} inset;
@@ -34,11 +33,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   html, body{
-    width: 100%;
-    height: 100%;
     margin: 0;
     padding: 0;
-    min-width: 320px;
     overflow: auto;
     background-color: ${({theme}) => theme.colors.background};
   }

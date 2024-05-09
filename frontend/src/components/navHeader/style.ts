@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Header = styled.header`
-  width: calc(100% - 2rem);
   padding: 1rem;
   background-color: ${({theme}) => theme.colors.white};
   display: flex;
@@ -15,6 +14,19 @@ export const Header = styled.header`
   }
   .logo{
     width: 10rem;
+    @media (max-width: 899px) {
+      width: 2rem;
+    }
+  }
+  .mobile{
+    @media (min-width: 900px) {
+      display: None;
+    }
+  }
+  .desktop{
+    @media (max-width: 899px) {
+      display: None;
+    }
   }
 `
 

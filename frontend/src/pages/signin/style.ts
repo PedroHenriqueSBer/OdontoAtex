@@ -93,11 +93,6 @@ export const Button = styled.button<{primary?: boolean}>`
     box-shadow: 0 0 5px #00000060;
     filter: brightness(0.99);
   }
-  &.mobile{
-    @media (min-width: 800px) {
-      display: None;
-    }
-  }
 `
 
 export const Fieldset = styled.fieldset<{error?: boolean}>`

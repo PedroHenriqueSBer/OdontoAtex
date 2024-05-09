@@ -19,10 +19,6 @@ namespace Backend.Api.Controllers
         public async Task<ResultValidator<LoginViewModel>> Login([FromBody] LoginInputModel input) =>
             await _service.Login(input);
 
-        [HttpPost("signup")]
-        public async Task<ResultValidator<LoginViewModel>> Signup([FromBody] RegisterInputModel input) =>
-            await _service.Signup(input);
-
         [HttpGet("refresh-token/{input}")]
         public async Task<ResultValidator<LoginViewModel>> RefreshToken(string input) =>
                     await _service.RefreshToken(input);

@@ -3,6 +3,7 @@ using System;
 using Backend.Infra.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Infra.Data.Migrations
 {
     [DbContext(typeof(MysqlContext))]
-    partial class MysqlContextModelSnapshot : ModelSnapshot
+    [Migration("20240508012254_addTypeUserIntoUser")]
+    partial class addTypeUserIntoUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,8 +85,6 @@ namespace Backend.Infra.Data.Migrations
 
                     b.ToTable("Users", (string)null);
 
-                    b.UseTptMappingStrategy();
-
                     b.HasData(
                         new
                         {
@@ -94,21 +95,6 @@ namespace Backend.Infra.Data.Migrations
                             Password = "b9dTRAtfpjCeutoajD8pSw==",
                             Type = 0
                         });
-                });
-
-            modelBuilder.Entity("Backend.Domain.Entities.Student", b =>
-                {
-                    b.HasBaseType("Backend.Domain.Entities.User");
-
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Period")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.ToTable("Student", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.RefreshToken", b =>
@@ -126,15 +112,6 @@ namespace Backend.Infra.Data.Migrations
                     b.Navigation("CreatedBy");
 
                     b.Navigation("UpdatedBy");
-                });
-
-            modelBuilder.Entity("Backend.Domain.Entities.Student", b =>
-                {
-                    b.HasOne("Backend.Domain.Entities.User", null)
-                        .WithOne()
-                        .HasForeignKey("Backend.Domain.Entities.Student", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Backend.Domain.Entities.User", b =>

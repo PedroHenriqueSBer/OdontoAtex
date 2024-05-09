@@ -25,10 +25,12 @@ namespace Backend.Injection
             var _settings = serviceProvider.GetService<IOptions<AppSettings>>()?.Value;
 
             services
+                .AddScoped<IBaseRepository<Student>, BaseRepository<Student>>()
                 .AddScoped<IBaseRepository<RefreshToken>, BaseRepository<RefreshToken>>()
                 .AddScoped<IBaseRepository<User>, BaseRepository<User>>();
             
             services
+                .AddScoped<IUserService, UserService>()
                 .AddScoped<IAuthService, AuthService>();
 
             services.AddDbContext<MysqlContext>(options =>
