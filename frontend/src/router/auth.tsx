@@ -19,7 +19,7 @@ export const Auth = ({children}: AuthProps) => {
 
   useEffect(() => {
     if(!isTokenValid)
-      navigate('/')
+      navigate('/signin')
   },[isTokenValid])
   
   return (
@@ -36,7 +36,7 @@ export const AuthAdm = ({children}: AuthProps) => {
 
   useEffect(() => {
     if(!isTokenValid)
-      navigate('/')
+      navigate('/signin')
     if(user.type !== TypeUser.ADM)
       navigate('/')
   },[isTokenValid])

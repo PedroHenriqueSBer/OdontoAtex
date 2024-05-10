@@ -15,17 +15,17 @@ export const NavHeader = () => {
 
   const theme = useTheme()
 
-  const { logout, user } = useAuth()
+  const { logout, user, isTokenValid } = useAuth()
 
   const options = [
     {
-      route: '/home',
+      route: '/',
       icon: UserRound,
       name: 'Pacientes',
       enable: true
     },
     {
-      route: '/home',
+      route: '/',
       icon: Calendar,
       name: 'Agenda',
       enable: true
@@ -42,48 +42,64 @@ export const NavHeader = () => {
     <>
       <Header>
         <div className="desktop">
-          <button onClick={() => navigate('/home')}>
+          <button onClick={() => navigate('/')}>
             <img className="logo" src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/TypeUser/frontend/src/assets/unifenas.png?raw=true" alt="Logo da Unifenas" />
           </button>
-          {options.filter(o => o.enable).map(({icon: Icon,name,route}) => 
-            <Button style={{gap: '0.4rem'}} onClick={()=>navigate(route)}>
-              <Icon width={19} height={19} />
-              {name}
-            </Button>
-          )}
+          {isTokenValid &&
+            options.filter(o => o.enable).map(({icon: Icon,name,route}) => 
+              <Button style={{gap: '0.4rem'}} onClick={()=>navigate(route)}>
+                <Icon width={19} height={19} />
+                {name}
+              </Button>
+            )
+          }
         </div>
         <div className="mobile">
-          <button onClick={() => navigate('/home')}>
+          <button onClick={() => navigate('/')}>
             <img className="logo" src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/TypeUser/frontend/src/assets/icon.png?raw=true" alt="Logo da BiteByte" />
           </button>
         </div>
-        <div>
-          <IconButton color="primary">
-            <Bell width={19} height={19} />
-          </IconButton>
-          <Dropdown>
-            <MenuButton><img src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/TypeUser/frontend/src/assets/userImage.png?raw=true" alt="" /></MenuButton>
-            <Menu>
-              <MenuItemContent>
-                <MenuItemButton className="first" variant="default"><User width={16} height={16} />Perfill</MenuItemButton>
-                <MenuItemButton className="last" onClick={()=>{logout()}} variant="warning"><LogOut width={16} height={16}/>Sair</MenuItemButton>
-              </MenuItemContent>
-            </Menu>
-          </Dropdown>
-          <div className="mobile">
-            <Dropdown>
-              <MenuButton><EllipsisVertical width={19} height={19} style={{color: theme.colors.primary}}/></MenuButton>
-              <Menu>
-                <MenuItemContent>
-                  {options.filter(o => o.enable).map(({icon: Icon,name,route}, index, self) => 
-                    <MenuItemButton className={index === 0 ? 'first' : (self.length-1) === index ? 'last' : '' } variant="default" onClick={()=>navigate(route)}><Icon width={16} height={16} />{name}</MenuItemButton>
-                  )}
-                </MenuItemContent>
-              </Menu>
-            </Dropdown>
-          </div>
+        {isTokenValid ?
+          (
+            <>
+              <div>
+                <IconButton color="primary">
+                  <Bell width={19} height={19} />
+                </IconButton>
+                <Dropdown>
+                  <MenuButton><img src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/TypeUser/frontend/src/assets/userImage.png?raw=true" alt="" /></MenuButton>
+                  <Menu>
+                    <MenuItemContent>
+                      <MenuItemButton className="first" variant="default"><User width={16} height={16} />Perfill</MenuItemButton>
+                      <MenuItemButton className="last" onClick={()=>{logout();navigate('/signin')}} variant="warning"><LogOut width={16} height={16}/>Sair</MenuItemButton>
+                    </MenuItemContent>
+                  </Menu>
+                </Dropdown>
+                <div className="mobile">
+                  <Dropdown>
+                    <MenuButton><EllipsisVertical width={19} height={19} style={{color: theme.colors.primary}}/></MenuButton>
+                    <Menu>
+                      <MenuItemContent>
+                        {options.filter(o => o.enable).map(({icon: Icon,name,route}, index, self) => 
+                          <MenuItemButton className={index === 0 ? 'first' : (self.length-1) === index ? 'last' : '' } variant="default" onClick={()=>navigate(route)}><Icon width={16} height={16} />{name}</MenuItemButton>
+                        )}
+                      </MenuItemContent>
+                    </Menu>
+                  </Dropdown>
+                </div>
+              </div>
+            </>
+          )
+          :
+          (
+            <div>
+              <Button onClick={() => navigate('/signin')}>
+                entrar
+              </Button>
+            </div>
+          )
+        }
 
-        </div>
       </Header>
     </>
 

@@ -45,7 +45,7 @@ export const Signin = () => {
 
   useEffect(() => {
     if (isTokenValid)
-      navigate('/home');
+      navigate('/');
   }, [isTokenValid, navigate]);
 
   useEffect(() => {
