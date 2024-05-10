@@ -4,7 +4,6 @@ export const GlobalStyle = createGlobalStyle`
   *{
     font-family: "Montserrat", sans-serif !important;
     font-weight: 500;
-    max-width: 100%;
     ::-webkit-scrollbar {
       width: 8px;
       background-color: ${({ theme }) => theme.colors.white};
@@ -32,10 +31,10 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-text-fill-color: ${({theme})=> theme.colors.text} !important;
   }
 
-  html, body{
+  html, body, div#root{
     margin: 0;
     padding: 0;
-    overflow: auto;
+    overflow-x: hidden;
     background-color: ${({theme}) => theme.colors.background};
   }
 

@@ -3,4 +3,5 @@ export interface IUser{
   name: string,
   email: string,
   type: import('./enum').TypeUser,
+  disabled: boolean,
 }

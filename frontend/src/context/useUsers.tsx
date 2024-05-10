@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { IProviderProps } from "../types/props";
 import { IUser } from "../types/models";
+import { userController } from "../controllers/userController";
 
 interface UsersContextProps {
   users: IUser[]
@@ -14,6 +15,7 @@ export const UserContextProvider = ({children} : IProviderProps) => {
   const [users, setUsers] = useState<IUser[]>([])
 
   useEffect(()=>{
+    userController.GetAll().then(setUsers).catch(console.log)
   },[])
 
   return (

@@ -17,5 +17,13 @@ namespace Backend.Api.Controllers
         [HttpPost("signup")]
         public async Task<ResultValidator<UserViewModel>> Signup([FromBody] RegisterInputModel input) =>
             await _service.Signup(input);
+
+        [HttpGet("get-all")]
+        public async Task<ResultValidator<List<UserViewModel>>> GetAll() =>
+            await _service.GetAll();
+
+        [HttpPut("delete/{id}")]
+        public async Task<ResultValidator<bool>> Disable(Guid id) =>
+            await _service.Disable(id);
     }
 }

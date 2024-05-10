@@ -12,5 +12,7 @@ namespace Backend.Aplication.Services.Interfaces
     public interface IUserService
     {
         Task<ResultValidator<UserViewModel>> Signup(RegisterInputModel input);
+        Task<ResultValidator<List<UserViewModel>>> GetAll();
+        Task<ResultValidator<bool>> Disable(Guid id);
     }
 }

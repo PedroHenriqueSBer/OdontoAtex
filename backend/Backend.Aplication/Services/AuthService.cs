@@ -38,6 +38,8 @@ namespace Backend.Aplication.Services
                 return ResultService<LoginViewModel>.Fail("Usuário não encontrado");
             if(user.Password != CryptoService.Encrypt(input.Password))
                 return ResultService<LoginViewModel>.Fail("Senha Incorreta");
+            if (user.Disabled)
+                return ResultService<LoginViewModel>.Fail("Usuário desabilitado");
 
 
             var token = TokenService.Generate(user!, _settings.AUTH_SECRET);
@@ -58,7 +60,7 @@ namespace Backend.Aplication.Services
                 Token = token,
                 RefreshToken = refreshToken.Token,
             };
-                
+            
             return ResultService<LoginViewModel>.Ok(res);
 
         }

@@ -9,6 +9,16 @@ const Signup = (input: ISignupInputModels) =>
   new Promise<IUser>((resolve,reject)=>
     api.post(`${route}/signup`, input).then(({data})=> resolveResponse<IUser>(resolve,reject,data)).catch(reject))
 
+const GetAll = () => 
+  new Promise<IUser[]>((resolve,reject)=>
+    api.get(`${route}/get-all`).then(({data})=> resolveResponse<IUser[]>(resolve,reject,data)).catch(reject))
+
+const Disabled = (id: string) => 
+  new Promise<boolean>((resolve,reject)=>
+    api.put(`${route}/delete/${id}`).then(({data})=> resolveResponse<boolean>(resolve,reject,data)).catch(reject))
+
 export const userController = {
-  Signup
+  Signup,
+  GetAll,
+  Disabled
 }

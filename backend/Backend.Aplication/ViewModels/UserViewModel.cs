@@ -9,6 +9,7 @@ namespace Backend.Aplication.ViewModels
         public string Name { get; set; }
         public string Email { get; set; }
         public TypeUser Type { get; set; }
+        public bool Disabled { get; set; }
 
         public static UserViewModel FromModel(User input) => new()
         {
@@ -16,6 +17,7 @@ namespace Backend.Aplication.ViewModels
             Name = input.Name,
             Email = input.Email,
             Type = input.Type,
+            Disabled = input.Disabled
         };
     }
 }

@@ -72,7 +72,7 @@ export const FormCreateUser = () => {
       userController.Signup(inputFinal)
         .then(response => {
           reset(defaultValues)
-          users.push(response)
+          setUsers([response,...users])
         })
         .catch(setApiMessage)
         .finally(()=>{
@@ -83,7 +83,7 @@ export const FormCreateUser = () => {
       userController.Signup(input)
         .then(response => {
           reset(defaultValues)
-          users.push(response)
+          setUsers([response,...users])
         })
         .catch(setApiMessage)
         .finally(()=>{
