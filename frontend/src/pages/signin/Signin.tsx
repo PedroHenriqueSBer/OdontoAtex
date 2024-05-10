@@ -71,7 +71,6 @@ export const Signin = () => {
         <Sidebar>
           <h1>BEM - VINDO</h1>
           <h2><span>NOVO</span> LOGIN</h2>
-          <Button onClick={()=>navigate('/signup')}>Criar Conta</Button>
         </Sidebar>
         <Main onSubmit={handleSubmit(handleSignin)}>
           <h1>FAÇA LOGIN</h1>
@@ -120,10 +119,7 @@ export const Signin = () => {
             
             <ButtonLink type="button">Redefinir Senha?</ButtonLink>
           </div>
-          <div className="btnContent">
-            <Button type="submit" primary>Entrar</Button>
-            <Button type="button" className="mobile" onClick={()=>navigate('/signup')}>Criar Conta</Button>
-          </div>
+          <Button type="submit" primary>Entrar</Button>
         </Main>
       </Content>
       <Popup 

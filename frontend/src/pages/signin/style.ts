@@ -6,6 +6,10 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (min-width: 800px) {
+    background-size: cover;
+    background-image: url('https://github.com/PedroHenriqueSBer/OdontoAtex/blob/Signin-and-Signup-Page/frontend/src/assets/backgroundSignup.png?raw=true');
+  }
 `
 export const Content = styled.div`
   @media (min-width: 800px) {
