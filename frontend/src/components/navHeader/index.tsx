@@ -85,13 +85,13 @@ export const NavHeader = ({
                     </MenuItemContent>
                   </Menu>
                 </Dropdown>
-                <div className="mobile">
+                <div className="mobile patient calendar user">
                   <Dropdown>
                     <MenuButton><EllipsisVertical width={19} height={19} style={{color: theme.colors.primary}}/></MenuButton>
                     <Menu>
                       <MenuItemContent>
                         {options.filter(o => o.enable).map(({icon: Icon,name,route}, index, self) => 
-                          <MenuItemButton className={index === 0 ? 'first' : (self.length-1) === index ? 'last' : '' } variant="default" onClick={()=>navigate(route)}><Icon width={16} height={16} />{name}</MenuItemButton>
+                          <MenuItemButton className={index === 0 ? 'first' : (self.length-1) === index ? 'last' : ''} variant="default" onClick={()=>navigate(route)}><Icon width={16} height={16} />{name}</MenuItemButton>
                         )}
                       </MenuItemContent>
                     </Menu>

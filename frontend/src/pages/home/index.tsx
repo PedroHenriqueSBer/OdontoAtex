@@ -14,19 +14,19 @@ export const Home = () => {
       <Containter>
         <HomeImage>
           <div>
-            <Typography component='p' variant="h3" color='primary'>Bem Vindo ao Bite&Byte</Typography>
+            <h1>Bem Vindo ao Bite&Byte</h1>
           </div>
         </HomeImage>
         <HomeContent>
           <img src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/HomePage/frontend/src/assets/icon.png?raw=true" alt="" />
-          <Typography component='p' variant="h4" color='primary'>É Bem Simples!</Typography>
+          <h1>É Bem Simples!</h1>
           <span>
             Uma soluçao fácil e intuitiva de gerenciamento de <br /> triagens, agendamentos, criação e edição dos clientes <br /> da unifenas!
           </span>
           <button onClick={()=>setIsOpen(true)}>Iniciar</button>
         </HomeContent>
         <HomeFooter className="seccond-step">
-          <Typography component='p' variant="h5" color='primary'>Caso de dúvida entre em contato!</Typography>
+          <h1>Caso de dúvida entre em contato!</h1>
           <span><Phone width={16} height={16}/> {'(99) 99999-9999'} <Mail width={16} height={16}/> adm@adm.com </span>
         </HomeFooter>
       </Containter>

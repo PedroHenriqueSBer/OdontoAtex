@@ -7,10 +7,11 @@ import { Ban, Check, Eye, Trash } from "lucide-react"
 import { useUser } from "../../context/useUsers"
 import { userController } from "../../controllers/userController"
 import { IUser } from "../../types/models"
+import { useEffect } from "react"
 
 export const Users = () => {
 
-  const {users, setUsers} = useUser()
+  const {users, setUsers, update} = useUser()
 
   const retType = (type: TypeUser) => 
     type === TypeUser.SECRETARY
@@ -28,6 +29,10 @@ export const Users = () => {
       }))
     })
   }
+
+  useEffect(()=>{
+    update()
+  },[])
   
 
   return (
