@@ -3,6 +3,7 @@ using Backend.Aplication.Services.Interfaces;
 using Backend.Aplication.Validators;
 using Backend.Aplication.ViewModels;
 using Backend.Domain.Entities;
+using Backend.Domain.Enum;
 using Backend.Domain.Services;
 using Backend.Domain.Validators;
 using Backend.Infra.Repositories.Interfaces;
@@ -37,6 +38,8 @@ namespace Backend.Aplication.Services
                 return ResultService<LoginViewModel>.Fail("Usuário não encontrado");
             if(user.Password != CryptoService.Encrypt(input.Password))
                 return ResultService<LoginViewModel>.Fail("Senha Incorreta");
+            if (user.Disabled)
+                return ResultService<LoginViewModel>.Fail("Usuário desabilitado");
 
 
             var token = TokenService.Generate(user!, _settings.AUTH_SECRET);
@@ -57,49 +60,9 @@ namespace Backend.Aplication.Services
                 Token = token,
                 RefreshToken = refreshToken.Token,
             };
-                
+            
             return ResultService<LoginViewModel>.Ok(res);
 
-        }
-
-        public async Task<ResultValidator<LoginViewModel>> Signup(RegisterInputModel input)
-        {
-            var validationResult = new RegisterValidator().Validate(input);
-            if (!validationResult.IsValid) return ResultService<LoginViewModel>.Fail("Informações Inválidas");
-            var UserWithEmail = await _repository.Get(u => u.Email == input.Email);
-            if (UserWithEmail != null)
-                return ResultService<LoginViewModel>.Fail("Este E-mail já está cadastrado");
-
-            var user = new User
-            {
-                Name = input.Name,
-                Email = input.Email,
-                Password = CryptoService.Encrypt(input.Password),
-            };
-
-            user.Id = await _repository.Insert(user);
-
-            var token = TokenService.Generate(user!, _settings.AUTH_SECRET);
-            var refreshToken = TokenService.GenerateRefreshToken(user!.Id);
-
-            var refresh = await _refreshTokens.Get(r => r.CreatedById == user!.Id, hasTracking: true);
-            if (refresh == null)
-            {
-                await _refreshTokens.Insert(refreshToken);
-            }
-            else
-            {
-                refresh.Token = refreshToken.Token;
-                refresh.ExpirationDate = refreshToken.ExpirationDate;
-                await _refreshTokens.Update(refresh);
-            }
-
-            var res = new LoginViewModel(user)
-            {
-                Token = token,
-                RefreshToken = refreshToken.Token,
-            };
-            return ResultService<LoginViewModel>.Ok(res);
         }
 
         public async Task<ResultValidator<LoginViewModel>> RefreshToken(string refreshToken)
@@ -112,7 +75,6 @@ namespace Backend.Aplication.Services
                     if (refresh.CreatedBy != null)
                     {
                         var token = TokenService.Generate(refresh.CreatedBy, _settings.AUTH_SECRET);
-                            
                         return ResultService<LoginViewModel>.Ok(new(refresh.CreatedBy)
                         {
                             Token = token,

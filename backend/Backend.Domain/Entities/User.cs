@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Backend.Domain.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,6 @@ namespace Backend.Domain.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         public RefreshToken? RefreshToken { get; set; }
+        public TypeUser Type { get; set; }
     }
 }

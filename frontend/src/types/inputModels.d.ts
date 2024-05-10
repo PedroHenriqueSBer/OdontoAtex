@@ -4,7 +4,9 @@ export interface ISigninInputModels {
 }
 
 export interface ISignupInputModels {
-  email: string
   name: string
-  password: string
+  email: string
+  type: import('./enum').TypeUser
+  number?: string
+  period?: string
 }

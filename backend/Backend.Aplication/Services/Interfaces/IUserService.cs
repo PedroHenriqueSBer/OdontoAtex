@@ -1,6 +1,5 @@
 ﻿using Backend.Aplication.InputModels;
 using Backend.Aplication.ViewModels;
-using Backend.Domain.Services;
 using Backend.Domain.Validators;
 using System;
 using System.Collections.Generic;
@@ -10,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace Backend.Aplication.Services.Interfaces
 {
-    public interface IAuthService
+    public interface IUserService
     {
-        Task<ResultValidator<LoginViewModel>> Login(LoginInputModel input);
-        Task<ResultValidator<LoginViewModel>> RefreshToken(string refreshToken);
+        Task<ResultValidator<UserViewModel>> Signup(RegisterInputModel input);
+        Task<ResultValidator<List<UserViewModel>>> GetAll();
+        Task<ResultValidator<bool>> Disable(Guid id);
     }
 }
