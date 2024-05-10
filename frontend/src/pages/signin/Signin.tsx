@@ -10,6 +10,7 @@ import { authController } from "../../controllers/authController";
 import { Button, ButtonLink, Container, Content, Fieldset, Helpertext, Main, Sidebar } from "./style";
 import { Eye, EyeOff, Info, Lock, Mail } from "lucide-react";
 import { Popup } from "../../components/popup";
+import { NavHeader } from "../../components/navHeader";
 
 export const Signin = () => {
 
@@ -66,73 +67,76 @@ export const Signin = () => {
   };
 
   return (
-    <Container>
-      <Content>
-        <Sidebar>
-          <h1>BEM - VINDO</h1>
-          <h2><span>NOVO</span> LOGIN</h2>
-        </Sidebar>
-        <Main onSubmit={handleSubmit(handleSignin)}>
-          <h1>FAÇA LOGIN</h1>
-          <div className="content">
-            <Controller 
-              control={control}
-              name="email"
-              render={({field})=>
-                <>
-                  <Fieldset error={!!errors.email?.message}>
-                    <div>
-                      <Mail width={18} height={18} />
-                    </div>
-                    <input {...field} type="text" placeholder="Email" />
-                  </Fieldset>
-                  {!!errors.email?.message &&
-                    <Helpertext>{errors.email?.message}</Helpertext>
-                  }
-                </>
+    <>
+      <NavHeader position="absolute" />
+      <Container>
+        <Content>
+          <Sidebar>
+            <h1>BEM - VINDO</h1>
+            <h2><span>NOVO</span> LOGIN</h2>
+          </Sidebar>
+          <Main onSubmit={handleSubmit(handleSignin)}>
+            <h1>FAÇA LOGIN</h1>
+            <div className="content">
+              <Controller 
+                control={control}
+                name="email"
+                render={({field})=>
+                  <>
+                    <Fieldset error={!!errors.email?.message}>
+                      <div>
+                        <Mail width={18} height={18} />
+                      </div>
+                      <input {...field} type="text" placeholder="Email" />
+                    </Fieldset>
+                    {!!errors.email?.message &&
+                      <Helpertext>{errors.email?.message}</Helpertext>
+                    }
+                  </>
 
-              }
-            />
-          </div>
-          <div className="content">
-            <Controller 
-              control={control}
-              name="password"
-              render={({field})=>
-                <>
-                  <Fieldset error={!!errors.password?.message}>
-                    <div>
-                      <Lock width={18} height={18} />
-                    </div>
-                    <input {...field} placeholder="Senha" type={showPassowrd? 'text' : 'password'} />
-                    <button type="button" onClick={()=>setShowPassowrd(!showPassowrd)}>
-                      {showPassowrd ? <Eye width={18} height={18}/> : <EyeOff width={18} height={18}/>}
-                    </button>
-                  </Fieldset>
-                  {!!errors.password?.message &&
-                    <Helpertext>{errors.password?.message}</Helpertext>
-                  }
-                </>
+                }
+              />
+            </div>
+            <div className="content">
+              <Controller 
+                control={control}
+                name="password"
+                render={({field})=>
+                  <>
+                    <Fieldset error={!!errors.password?.message}>
+                      <div>
+                        <Lock width={18} height={18} />
+                      </div>
+                      <input {...field} placeholder="Senha" type={showPassowrd? 'text' : 'password'} />
+                      <button type="button" onClick={()=>setShowPassowrd(!showPassowrd)}>
+                        {showPassowrd ? <Eye width={18} height={18}/> : <EyeOff width={18} height={18}/>}
+                      </button>
+                    </Fieldset>
+                    {!!errors.password?.message &&
+                      <Helpertext>{errors.password?.message}</Helpertext>
+                    }
+                  </>
 
-              }
-            />
-            
-            <ButtonLink type="button">Redefinir Senha?</ButtonLink>
-          </div>
-          <Button type="submit" primary>Entrar</Button>
-        </Main>
-      </Content>
-      <Popup 
-        isOpen={isOpenDialog}
-        onClose={()=>{setIsOpenDialog(!isOpenDialog); setMessageApi('')}}
-        onConfirm={()=>{setIsOpenDialog(!isOpenDialog); setMessageApi('')}}
-        onDenied={()=>{setIsOpenDialog(!isOpenDialog); setMessageApi('')}}
-        title='Erro'
-        icon={Info}
-        description={messageApi}
-        error
-        isNotDenied
-      />
-    </Container>
+                }
+              />
+              
+              <ButtonLink type="button">Redefinir Senha?</ButtonLink>
+            </div>
+            <Button type="submit" primary>Entrar</Button>
+          </Main>
+        </Content>
+        <Popup 
+          isOpen={isOpenDialog}
+          onClose={()=>{setIsOpenDialog(!isOpenDialog); setMessageApi('')}}
+          onConfirm={()=>{setIsOpenDialog(!isOpenDialog); setMessageApi('')}}
+          onDenied={()=>{setIsOpenDialog(!isOpenDialog); setMessageApi('')}}
+          title='Erro'
+          icon={Info}
+          description={messageApi}
+          error
+          isNotDenied
+        />
+      </Container>
+    </>
   );
 };

@@ -9,7 +9,14 @@ import { Button, IconButton } from "@mui/material";
 import { TypeUser } from "../../types/enum";
 import { useTheme } from "styled-components";
 
-export const NavHeader = () => {
+
+interface NavHeaderProps{
+  position?: 'fixed' | 'absolute'
+}
+
+export const NavHeader = ({
+  position
+}: NavHeaderProps) => {
 
   const navigate = useNavigate()
 
@@ -19,18 +26,21 @@ export const NavHeader = () => {
 
   const options = [
     {
+      classname: 'patient',
       route: '/',
       icon: UserRound,
       name: 'Pacientes',
       enable: true
     },
     {
+      classname: 'calendar',
       route: '/',
       icon: Calendar,
       name: 'Agenda',
       enable: true
     },
     {
+      classname: 'user',
       route: '/users',
       icon: UsersRound,
       name: 'Usuários',
@@ -40,14 +50,14 @@ export const NavHeader = () => {
 
   return (
     <>
-      <Header>
+      <Header position={position}>
         <div className="desktop">
           <button onClick={() => navigate('/')}>
             <img className="logo" src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/TypeUser/frontend/src/assets/unifenas.png?raw=true" alt="Logo da Unifenas" />
           </button>
           {isTokenValid &&
-            options.filter(o => o.enable).map(({icon: Icon,name,route}) => 
-              <Button style={{gap: '0.4rem'}} onClick={()=>navigate(route)}>
+            options.filter(o => o.enable).map(({icon: Icon,name,route,classname}) => 
+              <Button className={classname} style={{gap: '0.4rem'}} onClick={()=>navigate(route)}>
                 <Icon width={19} height={19} />
                 {name}
               </Button>
@@ -93,7 +103,7 @@ export const NavHeader = () => {
           :
           (
             <div>
-              <Button onClick={() => navigate('/signin')}>
+              <Button className="first-step" onClick={() => navigate('/signin')}>
                 entrar
               </Button>
             </div>

@@ -5,6 +5,7 @@ import light from "../styles/themes/light";
 import { LoadingHookProvider } from "./useLoading";
 import { AuthContextProvider } from "./useAuth";
 import { UserContextProvider } from "./useUsers";
+import { TourContextProvider } from "./useTour";
 
 const theme = createTheme({
   palette: {
@@ -36,7 +37,9 @@ export const Providers = ({children}: ProvidersProps) => {
         <LoadingHookProvider>
           <AuthContextProvider>
             <UserContextProvider>
-              {children}
+              <TourContextProvider>
+                {children}
+              </TourContextProvider>
             </UserContextProvider>
           </AuthContextProvider>
         </LoadingHookProvider>

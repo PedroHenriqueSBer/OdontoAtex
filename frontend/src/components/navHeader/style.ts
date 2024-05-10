@@ -1,10 +1,13 @@
 import styled from "styled-components";
 
-export const Header = styled.header`
+export const Header = styled.header<{position?: 'fixed' | 'absolute'}>`
+  z-index: 1;
+  position: ${({position}) => position ?? 'auto'};
   padding: 1rem;
   background-color: ${({theme}) => theme.colors.white};
   display: flex;
   align-items: center;
+  width: calc(100% - 2rem);
   box-shadow: 0 0 10px #00000027;
   justify-content: space-between;
   div {

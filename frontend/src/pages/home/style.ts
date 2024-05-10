@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const Containter = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `
 
 export const HomeImage = styled.div`
@@ -9,9 +12,8 @@ export const HomeImage = styled.div`
     width: fit-content;
     padding: 1rem 2rem;
     border-radius: 2rem;
-    background-attachment: fixed;
     box-shadow: 0 0 5px #25252533;
-    position: absolute;
+    position: relative;
     top: 8rem;
     left: 5rem;
   }
@@ -21,5 +23,29 @@ export const HomeImage = styled.div`
 `
 
 export const HomeContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  span{
+    text-align: center;
+    font-size: 1.2rem;
+    color: ${({theme}) => theme.colors.text};
+  }
+  button{
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    background-color: ${({theme}) => theme.colors.primary};
+    color: ${({theme}) => theme.colors.white};
+  }
+  img{
+    width: 5rem;
+    height: 5rem;
+  }
+`
 
+export const HomeFooter = styled.div`
+  padding: 1rem 2rem;
+  background-color: ${({theme}) => theme.colors.white};
 `
