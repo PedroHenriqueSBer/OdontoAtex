@@ -100,6 +100,9 @@ namespace Backend.Aplication.Services
 
             if (input.Type == TypeUser.STUDENT)
             {
+                var UserWithNumber = await _studentRepository.Get(u => u.Number == input.Number);
+                if (UserWithNumber != null)
+                    return ResultService<UserViewModel>.Fail("Esta matrícula já está cadastrada");
                 var student = new Student
                 {
                     Name = input.Name,

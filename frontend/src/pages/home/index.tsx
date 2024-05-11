@@ -11,7 +11,7 @@ export const Home = () => {
   return (
     <>
       <NavHeader position="fixed"/>
-      <Containter>
+      <Containter id="homePage">
         <HomeImage>
           <div>
             <h1>Bem Vindo ao Bite&Byte</h1>

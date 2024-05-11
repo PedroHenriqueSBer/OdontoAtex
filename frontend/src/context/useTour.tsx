@@ -74,7 +74,7 @@ export const TourContextProvider = ({children} : IProviderProps) => {
                 content: 'Gerencie os usuários do programa',
               }
             ]} />
-        ) : 
+        ) : user.type === TypeUser.SECRETARY ?
         (
           <ReturnTurnProvicer steps={[
             {
@@ -84,6 +84,23 @@ export const TourContextProvider = ({children} : IProviderProps) => {
             {
               selector: '.calendar',
               content: 'Verifique sua agenda, com suas consultas, triagens e etc',
+            }
+          ]} />
+        )
+        : 
+        (
+          <ReturnTurnProvicer steps={[
+            {
+              selector: '.patient',
+              content: 'Verifique e cadastre clientes no sistema da unifenas',
+            },
+            {
+              selector: '.calendar',
+              content: 'Verifique sua agenda, com suas consultas, triagens e etc',
+            },
+            {
+              selector: '.screening',
+              content: 'Gerencie suas triagens',
             }
           ]} />
         )

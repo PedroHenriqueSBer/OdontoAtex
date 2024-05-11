@@ -1,5 +1,5 @@
 import { ButtonHeader, Header, MenuItemContent, MenuItemButton } from "./style"
-import { Bell, UserRound, Calendar, User, LogOut, UsersRound, EllipsisVertical } from 'lucide-react'
+import { Bell, UserRound, Calendar, User, LogOut, UsersRound, EllipsisVertical, NotepadText } from 'lucide-react'
 import { Dropdown } from '@mui/base/Dropdown';
 import { MenuButton } from '@mui/base/MenuButton';
 import { Menu } from '@mui/base/Menu';
@@ -40,11 +40,18 @@ export const NavHeader = ({
       enable: true
     },
     {
+      classname: 'screening',
+      route: '/',
+      icon: NotepadText,
+      name: 'triagem',
+      enable: [TypeUser.STUDENT, TypeUser.TEACHER].includes(user.type)
+    },
+    {
       classname: 'user',
       route: '/users',
       icon: UsersRound,
       name: 'Usuários',
-      enable: user.type === TypeUser.ADM
+      enable: [TypeUser.ADM].includes(user.type)
     }
   ]
 
@@ -52,12 +59,12 @@ export const NavHeader = ({
     <>
       <Header position={position}>
         <div className="desktop">
-          <button onClick={() => navigate('/')}>
+          <button id="navigateHome" onClick={() => navigate('/')}>
             <img className="logo" src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/TypeUser/frontend/src/assets/unifenas.png?raw=true" alt="Logo da Unifenas" />
           </button>
           {isTokenValid &&
             options.filter(o => o.enable).map(({icon: Icon,name,route,classname}) => 
-              <Button className={classname} style={{gap: '0.4rem'}} onClick={()=>navigate(route)}>
+              <Button id={classname} className={classname} style={{gap: '0.4rem'}} onClick={()=>navigate(route)}>
                 <Icon width={19} height={19} />
                 {name}
               </Button>
@@ -77,11 +84,11 @@ export const NavHeader = ({
                   <Bell width={19} height={19} />
                 </IconButton>
                 <Dropdown>
-                  <MenuButton><img src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/TypeUser/frontend/src/assets/userImage.png?raw=true" alt="" /></MenuButton>
+                  <MenuButton className="btnProfile"><img src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/TypeUser/frontend/src/assets/userImage.png?raw=true" alt="" /></MenuButton>
                   <Menu>
                     <MenuItemContent>
                       <MenuItemButton className="first" variant="default"><User width={16} height={16} />Perfill</MenuItemButton>
-                      <MenuItemButton className="last" onClick={()=>{logout();navigate('/signin')}} variant="warning"><LogOut width={16} height={16}/>Sair</MenuItemButton>
+                      <MenuItemButton id="btnlogout" className="last" onClick={()=>{logout();navigate('/signin')}} variant="warning"><LogOut width={16} height={16}/>Sair</MenuItemButton>
                     </MenuItemContent>
                   </Menu>
                 </Dropdown>
@@ -103,7 +110,7 @@ export const NavHeader = ({
           :
           (
             <div>
-              <Button className="first-step" onClick={() => navigate('/signin')}>
+              <Button className="first-step" onClick={() => navigate('/signin')} id="joinBtn">
                 entrar
               </Button>
             </div>

@@ -69,7 +69,7 @@ export const Signin = () => {
   return (
     <>
       <NavHeader position="absolute" />
-      <Container>
+      <Container id="loginPage">
         <Content>
           <Sidebar>
             <h1>BEM - VINDO</h1>
@@ -122,7 +122,7 @@ export const Signin = () => {
               
               <ButtonLink type="button">Redefinir Senha?</ButtonLink>
             </div>
-            <Button type="submit" primary>Entrar</Button>
+            <Button type="submit" primary id="loginBtn">Entrar</Button>
           </Main>
         </Content>
         <Popup 
