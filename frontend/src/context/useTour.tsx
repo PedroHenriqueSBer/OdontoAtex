@@ -72,6 +72,10 @@ export const TourContextProvider = ({children} : IProviderProps) => {
               {
                 selector: '.user',
                 content: 'Gerencie os usuários do programa',
+              },
+              {
+                selector: '.seccond-step',
+                content: 'Em caso de dúvida tente entrar em contato conosco',
               }
             ]} />
         ) : user.type === TypeUser.SECRETARY ?
@@ -84,6 +88,10 @@ export const TourContextProvider = ({children} : IProviderProps) => {
             {
               selector: '.calendar',
               content: 'Verifique sua agenda, com suas consultas, triagens e etc',
+            },
+            {
+              selector: '.seccond-step',
+              content: 'Em caso de dúvida tente entrar em contato conosco',
             }
           ]} />
         )
@@ -101,6 +109,10 @@ export const TourContextProvider = ({children} : IProviderProps) => {
             {
               selector: '.screening',
               content: 'Gerencie suas triagens',
+            },
+            {
+              selector: '.seccond-step',
+              content: 'Em caso de dúvida tente entrar em contato conosco',
             }
           ]} />
         )

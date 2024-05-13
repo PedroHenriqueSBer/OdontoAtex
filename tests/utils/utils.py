@@ -30,3 +30,21 @@ def complete_form(driver, data: list[dict], submitId: str):
     driver.find_element(By.NAME, content['name']).clear()
     driver.find_element(By.NAME, content['name']).send_keys(content['value'])
   driver.find_element(By.ID, submitId).click()
+
+def find_errors_form(driver, validator: list[dict], submitId: str):
+  for item in validator:
+    formData = item['formData']
+    complete_form(driver,formData,submitId)
+    if item['popup']:
+      wait(driver,By.ID,'popupText')
+      if driver.find_element(By.ID, 'popupText').text == item['error_message']:
+        log(item['log_success'])
+      else:
+        log(item['log_error'],True)
+      driver.find_element(By.ID,'confirmPopUp').click()
+    else:
+      wait(driver,By.CLASS_NAME,'bzpbLg')
+      if driver.find_element(By.CLASS_NAME, 'bzpbLg').text == item['error_message']:
+        log(item['log_success'])
+      else:
+        log(item['log_error'],True)

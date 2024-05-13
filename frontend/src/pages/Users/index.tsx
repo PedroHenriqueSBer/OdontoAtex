@@ -1,17 +1,21 @@
-import { Button, Grid, IconButton, Tooltip, Typography } from "@mui/material"
+import { Button, Grid, IconButton, Input, TextField, Tooltip, Typography } from "@mui/material"
 import { NavHeader } from "../../components/navHeader"
 import { CardUser, Containter, Content } from "./style"
 import { TypeUser } from "../../types/enum"
 import { FormCreateUser } from "../../components/FormCreateUser"
-import { Ban, Check, Eye, Trash } from "lucide-react"
+import { Ban, Check, Eye, Search, Trash } from "lucide-react"
 import { useUser } from "../../context/useUsers"
 import { userController } from "../../controllers/userController"
 import { IUser } from "../../types/models"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { useTheme } from "styled-components"
 
 export const Users = () => {
 
   const {users, setUsers, update} = useUser()
+  const [selectedUsers, setSelectedUsers] = useState<IUser[]>([])
+  const [search, setSearch] = useState<string>('')
+  const theme = useTheme()
 
   const retType = (type: TypeUser) => 
     type === TypeUser.SECRETARY
@@ -22,7 +26,7 @@ export const Users = () => {
 
   const disable = (user: IUser) => {
     userController.Disabled(user.id).then(()=>{
-      setUsers(users.map(u => {
+      setSelectedUsers(selectedUsers.map(u => {
         if(u.id === user.id)
           u.disabled = !u.disabled
         return u
@@ -31,10 +35,14 @@ export const Users = () => {
   }
 
   useEffect(()=>{
+    setSelectedUsers(users.filter(u => u.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())))
+  },[search])
+
+  useEffect(()=>{
     update()
+    setSelectedUsers(users)
   },[])
   
-
   return (
     <>
       <NavHeader />
@@ -58,10 +66,21 @@ export const Users = () => {
             <Grid item xs={12} md={6} lg={8}>
               <Content>
                 <Grid container spacing={2}>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} sm={6} md={12} lg={4}>
                     <Typography component='p' variant="h5" color='primary'>Gerenciar Usuários</Typography>
                   </Grid>
-                  {users.map(u => 
+                  <Grid item xs={12} sm={6} md={12} lg={8}>
+                    <Input 
+                      size="small"
+                      placeholder="Pesquisar..."
+                      startAdornment={<Search style={{padding: '0 0.5rem'}} color={theme.colors.primary} width={18} height={18} />}
+                      style={{
+                        color: theme.colors.primary,
+                      }}
+                      onChange={({target: {value}}) => setSearch(value)}
+                    />
+                  </Grid>
+                  {selectedUsers.map(u => 
                     <Grid key={u.id} item xs={12} lg={6}>
                       <CardUser>
                         <div className="content">
@@ -81,7 +100,6 @@ export const Users = () => {
                       </CardUser>
                     </Grid>
                   )}
-
                 </Grid>
               </Content>
             </Grid>

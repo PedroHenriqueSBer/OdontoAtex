@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from utils.utils import wait, log, complete_form
+from utils.utils import wait, log, complete_form, find_errors_form
 
 def runLoginPage(url: str):
   log('iniciando o teste de login')
@@ -18,41 +18,75 @@ def runLoginPage(url: str):
     driver.find_element(By.ID, 'joinBtn').click()
     log('botão de entrar encontrado')
     wait(driver,By.ID,'loginPage')
-    formDataLogin = [
+    validator = [
       {
-        'name': 'email',
-        'value': 'adm@adms.com'
+        'formData': [
+          {
+            'name': 'email',
+            'value': 'adm@adms.com'
+          },
+          {
+            'name': 'password',
+            'value': 'senha fortes'
+          }
+        ],
+        'popup': True,
+        'error_message': 'Usuário não encontrado',
+        'log_success': 'Email inválido foi encontrado com sucesso',
+        'log_error': 'Email inválido foi aceito'
       },
       {
-        'name': 'password',
-        'value': 'senha fortes'
-      }
-    ]
-    complete_form(driver,formDataLogin,'loginBtn')
-    wait(driver,By.ID,'popupText')
-    if driver.find_element(By.ID, 'popupText').text == 'Usuário não encontrado':
-      log('Email inválido foi encontrado com sucesso')
-    else:
-      log('Email inválido foi aceito',True)
-    driver.find_element(By.ID,'confirmPopUp').click()
-    formDataLogin = [
-      {
-        'name': 'email',
-        'value': 'adm@adm.com'
+        'formData': [
+          {
+            'name': 'email',
+            'value': 'adm@adm.com'
+          },
+          {
+            'name': 'password',
+            'value': 'senha fortes'
+          }
+        ],
+        'popup': True,
+        'error_message': 'Senha Incorreta',
+        'log_success': 'Senha inválida foi encontrada com sucesso',
+        'log_error': 'Senha inválida foi aceita'
       },
       {
-        'name': 'password',
-        'value': 'senha fortes'
+        'formData': [
+          {
+            'name': 'email',
+            'value': 'emailinvalido'
+          },
+          {
+            'name': 'password',
+            'value': ' '
+          }
+        ],
+        'popup': False,
+        'error_message': 'Email inválido',
+        'log_success': 'Email inválido foi encontrada com sucesso',
+        'log_error': 'Email inválido foi aceito'
+      },
+      {
+        'formData': [
+          {
+            'name': 'email',
+            'value': 'adm@adm.com'
+          },
+          {
+            'name': 'password',
+            'value': ' '
+          }
+        ],
+        'popup': False,
+        'error_message': 'mínimo 6 caracteres',
+        'log_success': 'Valor mínimo da senha foi encontrada com sucesso',
+        'log_error': 'Valor mínimo da senha  foi aceito'
       }
     ]
-    complete_form(driver,formDataLogin,'loginBtn')
-    wait(driver,By.ID,'popupText')
-    if driver.find_element(By.ID, 'popupText').text == 'Senha Incorreta':
-      log('Senha inválida foi encontrada com sucesso')
-    else:
-      log('Senha inválida foi aceita',True)
-    driver.find_element(By.ID,'confirmPopUp').click()
-    formDataLogin = [
+    find_errors_form(driver,validator,'loginBtn')
+
+    complete_form(driver,[
       {
         'name': 'email',
         'value': 'adm@adm.com'
@@ -61,8 +95,9 @@ def runLoginPage(url: str):
         'name': 'password',
         'value': 'senha forte'
       }
-    ]
-    complete_form(driver,formDataLogin,'loginBtn')
+    ],'loginBtn')
+
+
     if not wait(driver,By.ID,'homePage'):
       raise Exception('Erro ao logar com o perfil de adm@adm.com')
     driver.find_element(By.CLASS_NAME,'btnProfile').click()
