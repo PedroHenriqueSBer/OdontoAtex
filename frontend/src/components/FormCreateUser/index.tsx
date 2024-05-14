@@ -207,6 +207,7 @@ export const FormCreateUser = () => {
             fullWidth
             type="submit"
             variant="contained"
+            id="btnCreateUser"
           >
             Criar
           </Button>

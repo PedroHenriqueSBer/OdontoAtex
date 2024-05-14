@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 import os
 from datetime import datetime
+from selenium.webdriver.support.select import Select
 
 now = datetime.now()
 log_path = os.getcwd() + '\\logs\\'
@@ -24,7 +25,16 @@ def log(message: str, error: bool = False):
     logFile.write(f'[error]: {message}\n')
   else:
     logFile.write(f'[success]: {message}\n')
-    
+
+def SelectOption(driver, name, value):
+  for select in driver.find_elements(By.CLASS_NAME,'css-at3jax-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root'):
+    for el in select.find_elements(By.TAG_NAME, 'div'):
+      if el.get_attribute('id') == f'mui-component-select-{name}':
+        select.click()
+        sleep(5)
+        options = driver.find_elements(By.CLASS_NAME,'MuiMenuItem-gutters')
+        driver.execute_script('arguments[0].click()',options[value])
+
 def complete_form(driver, data: list[dict], submitId: str):
   for content in data:
     driver.find_element(By.NAME, content['name']).clear()
