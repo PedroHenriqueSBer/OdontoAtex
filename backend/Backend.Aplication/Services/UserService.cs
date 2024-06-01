@@ -32,7 +32,6 @@ namespace Backend.Aplication.Services
         public UserService(
             IBaseRepository<User> repository,
             IBaseRepository<Student> studentRepository,
-            IBaseRepository<Log> logRepository,
             IOptions<AppSettings> settings,
             IWebHostEnvironment env,
             IHttpContextAccessor context
@@ -41,7 +40,6 @@ namespace Backend.Aplication.Services
             _settings = settings.Value;
             _repository = repository;
             _studentRepository = studentRepository;
-            _logRepository = logRepository;
             _env = env;
 
             var user = context?.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier);
@@ -122,7 +120,6 @@ namespace Backend.Aplication.Services
                     CreatedById = userId,
                     Type = TypeLog.SUCCESS,
                 };
-                await _logRepository.Insert(log);
                 return ResultService<UserViewModel>.Ok(UserViewModel.FromModel(student));
             }
             else
@@ -144,7 +141,6 @@ namespace Backend.Aplication.Services
                     CreatedById = userId,
                     Type = TypeLog.SUCCESS,
                 };
-                await _logRepository.Insert(log);
                 var response = UserViewModel.FromModel(user);
                 return ResultService<UserViewModel>.Ok(response);
             }

@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { Home } from "../pages/home"
 import { Auth, AuthAdm } from "./auth"
 import { Signin } from "../pages/signin/Signin"
-import { Users } from "../pages/Users"
+import { Users } from "../pages/users"
 
 export const Router = () => {
   return (

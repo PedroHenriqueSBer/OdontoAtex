@@ -36,10 +36,8 @@ export const AuthContextProvider = ({children} : IProviderProps) => {
   }
 
   useEffect(()=>{
-    console.log(refreshToken)
     if(typeof refreshToken === 'string'){
       authController.RefreshToken(refreshToken).then((response) => {
-        console.log(response)
         setUser(response.user)
         setToken(response.token)
         setRefreshToken(response.refreshToken)

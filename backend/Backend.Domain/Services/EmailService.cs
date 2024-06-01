@@ -44,7 +44,7 @@ namespace Backend.Domain.Services
             }
             catch (Exception ex)
             {
-
+                
             }
         }
     }

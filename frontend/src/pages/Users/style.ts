@@ -16,6 +16,8 @@ export const Content = styled.div`
   background: ${({theme}) => theme.colors.white};
   border-radius: 0.3rem;
   box-shadow: 0 0 5px #0233734d;
+  max-height: 25.5rem;
+  overflow: auto;
 `
 
 export const CardUser = styled.div`
@@ -30,6 +32,22 @@ export const CardUser = styled.div`
     color: ${({theme})=>theme.colors.primary};
     font-weight: 600;
     font-size: 1.4rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 10rem;
+    @media (min-width: 1200px) {
+      max-width: 12rem;
+    }
+    @media (min-width: 1300px) {
+      max-width: 15rem;
+    }
+    @media (min-width: 1500px) {
+      max-width: 19rem;
+    }
+    @media (min-width: 4000px) {
+      max-width: 24rem;
+    }
   }
   h5{
     margin: 0;

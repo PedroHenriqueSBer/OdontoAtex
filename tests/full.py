@@ -1,7 +1,8 @@
-from pages.login import runLoginPage
 from pages.home import runHomePage
+from pages.login import runLoginPage
+from pages.users import runUsersPage
+from utils.config import BASE_URL
 
-url = 'http://localhost:3000'
-
-runLoginPage(url)
-runHomePage(url)
+runLoginPage(BASE_URL)
+runHomePage(BASE_URL)
+runUsersPage(BASE_URL)

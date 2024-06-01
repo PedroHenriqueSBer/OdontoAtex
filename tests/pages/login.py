@@ -4,7 +4,9 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from utils.utils import wait, log, complete_form, find_errors_form
+from utils.utils import wait, log
+from utils.config import BASE_URL
+from components.form import complete_form, find_errors_form
 
 def runLoginPage(url: str):
   log('iniciando o teste de login')
@@ -23,11 +25,13 @@ def runLoginPage(url: str):
         'formData': [
           {
             'name': 'email',
-            'value': 'adm@adms.com'
+            'value': 'adm@adms.com',
+            'type': 0
           },
           {
             'name': 'password',
-            'value': 'senha fortes'
+            'value': 'senha fortes',
+            'type': 0
           }
         ],
         'popup': True,
@@ -39,11 +43,13 @@ def runLoginPage(url: str):
         'formData': [
           {
             'name': 'email',
-            'value': 'adm@adm.com'
+            'value': 'adm@adm.com',
+            'type': 0
           },
           {
             'name': 'password',
-            'value': 'senha fortes'
+            'value': 'senha fortes',
+            'type': 0
           }
         ],
         'popup': True,
@@ -55,11 +61,13 @@ def runLoginPage(url: str):
         'formData': [
           {
             'name': 'email',
-            'value': 'emailinvalido'
+            'value': 'emailinvalido',
+            'type': 0
           },
           {
             'name': 'password',
-            'value': ' '
+            'value': ' ',
+            'type': 0
           }
         ],
         'popup': False,
@@ -71,11 +79,13 @@ def runLoginPage(url: str):
         'formData': [
           {
             'name': 'email',
-            'value': 'adm@adm.com'
+            'value': 'adm@adm.com',
+            'type': 0
           },
           {
             'name': 'password',
-            'value': ' '
+            'value': ' ',
+            'type': 0
           }
         ],
         'popup': False,
@@ -89,11 +99,13 @@ def runLoginPage(url: str):
     complete_form(driver,[
       {
         'name': 'email',
-        'value': 'adm@adm.com'
+        'value': 'adm@adm.com',
+        'type': 0
       },
       {
         'name': 'password',
-        'value': 'senha forte'
+        'value': 'senha forte',
+        'type': 0
       }
     ],'loginBtn')
 
@@ -112,4 +124,3 @@ def runLoginPage(url: str):
     driver.close()
     log(f'Erro testar a pagina de login: \n {e} \n',True)
   
-

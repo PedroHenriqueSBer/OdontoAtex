@@ -12,7 +12,7 @@ import { useTheme } from "styled-components"
 
 export const Users = () => {
 
-  const {users, setUsers, update} = useUser()
+  const {users, update} = useUser()
   const [selectedUsers, setSelectedUsers] = useState<IUser[]>([])
   const [search, setSearch] = useState<string>('')
   const theme = useTheme()
@@ -36,7 +36,7 @@ export const Users = () => {
 
   useEffect(()=>{
     setSelectedUsers(users.filter(u => u.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())))
-  },[search])
+  },[search, users])
 
   useEffect(()=>{
     update()
@@ -73,6 +73,7 @@ export const Users = () => {
                     <Input 
                       size="small"
                       placeholder="Pesquisar..."
+                      id="search"
                       startAdornment={<Search style={{padding: '0 0.5rem'}} color={theme.colors.primary} width={18} height={18} />}
                       style={{
                         color: theme.colors.primary,

@@ -90,7 +90,7 @@ export const Signin = () => {
                       <input {...field} type="text" placeholder="Email" />
                     </Fieldset>
                     {!!errors.email?.message &&
-                      <Helpertext>{errors.email?.message}</Helpertext>
+                      <Helpertext className="MuiFormHelperText-root">{errors.email?.message}</Helpertext>
                     }
                   </>
 
@@ -113,7 +113,7 @@ export const Signin = () => {
                       </button>
                     </Fieldset>
                     {!!errors.password?.message &&
-                      <Helpertext>{errors.password?.message}</Helpertext>
+                      <Helpertext className="MuiFormHelperText-root">{errors.password?.message}</Helpertext>
                     }
                   </>
 

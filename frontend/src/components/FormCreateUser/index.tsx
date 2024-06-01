@@ -13,6 +13,7 @@ import { useLoading } from "../../context/useLoading"
 export const FormCreateUser = () => {
 
   const [apiMessage, setApiMessage] = useState<string>('')
+  const { setIsLoading } = useLoading()
 
   const schema = yup.object<ISignupInputModels>().shape({
     email: yup.string().email('Precisa ser um email válido').required('Campo nescessário'),
@@ -36,10 +37,6 @@ export const FormCreateUser = () => {
   } = useUser()
 
   const {
-    setIsLoading
-  } = useLoading()
- 
-  const {
     control,
     formState: {errors},
     watch,
@@ -52,13 +49,13 @@ export const FormCreateUser = () => {
   })
 
   const onSubmit = (input: ISignupInputModels) => {
-    setIsLoading(true)
     if(input.type === TypeUser.STUDENT){
       if(input.number === undefined){
         setError('number',{message: 'Campo nescessário'})
         return
       }
-      if(input.number?.length !== 9){
+      console.log(input.number?.length)
+      if(input.number?.length !== 10){
         setError('number',{message: 'Número inválido'})
         return
       }
@@ -69,6 +66,7 @@ export const FormCreateUser = () => {
         number: input.number,
         period: input.period
       }
+      setIsLoading(true)
       userController.Signup(inputFinal)
         .then(response => {
           reset(defaultValues)
@@ -80,6 +78,7 @@ export const FormCreateUser = () => {
         })
     }
     else{
+      setIsLoading(true)
       userController.Signup(input)
         .then(response => {
           reset(defaultValues)
@@ -160,13 +159,14 @@ export const FormCreateUser = () => {
             <Controller 
               name="number"
               control={control}
-              render={({field}) =>
+              render={({field: {value, ...field}}) =>
                 <TextField 
                   label="Número de inscrição"
                   error={!!errors.number?.message}
                   helperText={errors.number?.message}
                   size="small"
                   {...field}
+                  value={value ? value.substring(0,9).replace(/\D/g, '') : ''}
                   fullWidth
                 />
               }

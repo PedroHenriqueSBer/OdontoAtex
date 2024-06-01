@@ -63,8 +63,8 @@ export const NavHeader = ({
             <img className="logo" src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/TypeUser/frontend/src/assets/unifenas.png?raw=true" alt="Logo da Unifenas" />
           </button>
           {isTokenValid &&
-            options.filter(o => o.enable).map(({icon: Icon,name,route,classname}) => 
-              <Button id={classname} className={classname} style={{gap: '0.4rem'}} onClick={()=>navigate(route)}>
+            options.filter(o => o.enable).map(({icon: Icon,name,route,classname}, index) => 
+              <Button key={index} id={classname} className={classname} style={{gap: '0.4rem'}} onClick={()=>navigate(route)}>
                 <Icon width={19} height={19} />
                 {name}
               </Button>
@@ -98,7 +98,7 @@ export const NavHeader = ({
                     <Menu>
                       <MenuItemContent>
                         {options.filter(o => o.enable).map(({icon: Icon,name,route}, index, self) => 
-                          <MenuItemButton className={index === 0 ? 'first' : (self.length-1) === index ? 'last' : ''} variant="default" onClick={()=>navigate(route)}><Icon width={16} height={16} />{name}</MenuItemButton>
+                          <MenuItemButton key={index} className={index === 0 ? 'first' : (self.length-1) === index ? 'last' : ''} variant="default" onClick={()=>navigate(route)}><Icon width={16} height={16} />{name}</MenuItemButton>
                         )}
                       </MenuItemContent>
                     </Menu>

@@ -4,31 +4,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from utils.utils import wait, log, complete_form
-
-def login(driver, email, password):
-    driver.find_element(By.ID, 'joinBtn').click()
-    log('botão de entrar encontrado')
-    wait(driver,By.ID,'loginPage')
-    formDataLogin = [
-      {
-        'name': 'email',
-        'value': email
-      },
-      {
-        'name': 'password',
-        'value': password
-      }
-    ]
-    complete_form(driver,formDataLogin,'loginBtn')
-    if not wait(driver,By.ID,'homePage'):
-      raise Exception(f'Erro ao logar com o perfil de {email}')
-def logout(driver):
-  driver.find_element(By.CLASS_NAME,'btnProfile').click()
-  driver.find_element(By.ID,'btnlogout').click()
-  wait(driver,By.ID,'loginPage')
-  driver.find_element(By.ID,'navigateHome').click()
-  log('logout completado com sucesso')
+from utils.utils import wait, log, login, logout
+from utils.config import BASE_URL
   
 def isShow(driver,className,displayName,isShow,userType):
   if wait(driver,By.ID,className, 3):
@@ -79,4 +56,3 @@ def runHomePage(url: str):
     driver.close()
     log(f'Erro testar a pagina de home: \n {e} \n',True)
   
-
