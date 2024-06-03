@@ -1,5 +1,4 @@
-import { IResultServiceProps } from "../types/props";
-
+import { IResultServiceProps } from "props";
 
 export const resolveResponse = <t>(
   resolve: (value: t | PromiseLike<t>) => void,

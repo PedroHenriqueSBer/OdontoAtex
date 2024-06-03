@@ -1,7 +1,7 @@
-import { ISigninInputModels, ISignupInputModels } from "../types/inputModels";
-import { ILoginViewModel } from "../types/viewModels";
-import { api } from "../service/api";
-import { resolveResponse } from "../utils";
+import { ISigninInputModels } from "inputModels"
+import { ILoginViewModel } from "viewModels"
+import { api } from "../../service/api"
+import { resolveResponse } from "../../utils"
 
 const route = 'Auth'
 

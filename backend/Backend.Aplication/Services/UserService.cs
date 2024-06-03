@@ -24,7 +24,6 @@ namespace Backend.Aplication.Services
 
         private readonly IBaseRepository<User> _repository;
         private readonly IBaseRepository<Student> _studentRepository;
-        private readonly IBaseRepository<Log> _logRepository;
         private readonly AppSettings _settings;
         private readonly IWebHostEnvironment _env;
         private readonly Guid userId;
@@ -143,6 +142,21 @@ namespace Backend.Aplication.Services
                 };
                 var response = UserViewModel.FromModel(user);
                 return ResultService<UserViewModel>.Ok(response);
+            }
+        }
+
+        public async Task<ResultValidator<bool>> ResetPassword(ResetPasswordInputModel input)
+        {
+            try
+            {
+                var user = await _repository.Get(u => u.Email == input.Email);
+                user.Password = CryptoService.Encrypt(input.Password);
+                await _repository.Update(user);
+                return ResultService<bool>.Ok(true);
+            }
+            catch (Exception ex)
+            {
+                return ResultService<bool>.Fail(ex.Message);
             }
         }
     }

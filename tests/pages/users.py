@@ -66,34 +66,34 @@ def runUsersPage(url: str):
     login(driver, 'adm@adm.com','senha forte')
     driver.find_element(By.CLASS_NAME,'user').click()
     wait(driver,By.ID,'userPage')
-    # accounts = []
-    # accounts.append(
-    #   {
-    #     'name': f'Student_Test_{now}',
-    #     'type': type_user.STUDENT,
-    #     'number': randomNumbers(9),
-    #     'period': '5'
-    #   }
-    # )
-    # accounts.append(
-    #   {
-    #     'name': f'Secretary_Test_{now}',
-    #     'type': type_user.SECRETARY,
-    #   }
-    # )
-    # accounts.append(
-    #   {
-    #     'name': f'Teacher_Test_{now}',
-    #     'type': type_user.TEACHER,
-    #   }
-    # )
-    # for account in accounts:
-    #   createUser(driver,account)
+    accounts = []
+    accounts.append(
+      {
+        'name': f'Student_Test_{now}',
+        'type': type_user.STUDENT,
+        'number': randomNumbers(9),
+        'period': '5'
+      }
+    )
+    accounts.append(
+      {
+        'name': f'Secretary_Test_{now}',
+        'type': type_user.SECRETARY,
+      }
+    )
+    accounts.append(
+      {
+        'name': f'Teacher_Test_{now}',
+        'type': type_user.TEACHER,
+      }
+    )
+    for account in accounts:
+      createUser(driver,account)
 
-    # logout(driver)
-    # login(driver, 'adm@adm.com','senha forte')
-    # driver.find_element(By.CLASS_NAME,'user').click()
-    # wait(driver,By.ID,'userPage')
+    logout(driver)
+    login(driver, 'adm@adm.com','senha forte')
+    driver.find_element(By.CLASS_NAME,'user').click()
+    wait(driver,By.ID,'userPage')
     validator = [
       {
         'formData': [],
@@ -180,7 +180,7 @@ def runUsersPage(url: str):
         'log_error': 'Email cadastrado foi aceito'
       }
     ]
-    find_errors_form(driver,validator,'btnCreateUser')
+    find_errors_form(driver,validator,'btnCreateUser',True)
     log('Tela de usuário funcionando \n')
     driver.close()
 

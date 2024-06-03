@@ -1,20 +1,9 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { IProviderProps } from "../types/props";
-import { IUser } from "../types/models";
+import { createContext, useContext, useEffect, useMemo } from "react";
 import { jwtDecode } from "jwt-decode";
-import { usePersistedState } from "../hooks/usePersistedState";
-import { authController } from "../controllers/authController";
-
-
-interface AuthContextProps {
-  user: IUser
-  setUser: (value: IUser) => void
-  isTokenValid: boolean
-  token: string | undefined
-  setToken: (value: string | undefined) => void
-  setRefreshToken: (value: string | undefined) => void
-  logout: () => void
-}
+import { IUser } from "models";
+import { AuthContextProps, IProviderProps } from "props";
+import { authController } from "../../controllers";
+import { usePersistedState } from "../../hooks";
 
 const AuthContext = createContext({} as AuthContextProps)
 

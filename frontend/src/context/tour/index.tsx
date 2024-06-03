@@ -1,8 +1,7 @@
 import { TourProvider, StepType } from "@reactour/tour";
-import { IProviderProps } from "../types/props";
-import { useAuth } from "./useAuth";
-import { ReactNode, useEffect, useState } from "react";
-import { TypeUser } from "../types/enum";
+import { IProviderProps } from "props";
+import { useAuth } from "../useAuth";
+import { TypeUser } from "../../types/enum";
 
 export const TourContextProvider = ({children} : IProviderProps) => {
   
@@ -22,22 +21,6 @@ export const TourContextProvider = ({children} : IProviderProps) => {
       <>
         <TourProvider 
           steps={steps}
-          onClickMask={({ setCurrentStep, currentStep, steps, setIsOpen }) => {
-            if (steps) {
-              if (currentStep === steps.length - 1) {
-                setIsOpen(false)
-              }
-              setCurrentStep((s) => (s === steps.length - 1 ? 0 : s + 1))
-            }
-          }}
-          onClickClose={({ setCurrentStep, currentStep, steps, setIsOpen }) => {
-            if (steps) {
-              if (currentStep === steps.length - 1) {
-                setIsOpen(false)
-              }
-              setCurrentStep((s) => (s === steps.length - 1 ? 0 : s + 1))
-            }
-          }}
           >
           {children}
         </TourProvider>

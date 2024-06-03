@@ -1,14 +1,13 @@
-import { Button, Grid, IconButton, Input, TextField, Tooltip, Typography } from "@mui/material"
-import { NavHeader } from "../../components/navHeader"
+import { Grid, IconButton, Input, Tooltip, Typography } from "@mui/material"
 import { CardUser, Containter, Content } from "./style"
 import { TypeUser } from "../../types/enum"
-import { FormCreateUser } from "../../components/FormCreateUser"
-import { Ban, Check, Eye, Search, Trash } from "lucide-react"
-import { useUser } from "../../context/useUsers"
-import { userController } from "../../controllers/userController"
-import { IUser } from "../../types/models"
+import { FormCreateUser, NavHeader } from "../../components"
+import { Ban, Check, Eye, Search } from "lucide-react"
+import { useUser } from "../../context"
+import { IUser } from "models"
 import { useEffect, useState } from "react"
 import { useTheme } from "styled-components"
+import { userController } from "../../controllers"
 
 export const Users = () => {
 

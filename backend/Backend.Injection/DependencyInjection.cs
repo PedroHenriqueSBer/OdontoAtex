@@ -32,6 +32,7 @@ namespace Backend.Injection
             
             services
                 .AddScoped<IUserService, UserService>()
+                .AddScoped<ISendEmailService, SendEmailService>()
                 .AddScoped<IAuthService, AuthService>();
 
             services.AddDbContext<MysqlContext>(options =>

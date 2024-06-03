@@ -13,6 +13,7 @@ namespace Backend.Aplication.Services.Interfaces
     {
         Task<ResultValidator<UserViewModel>> Signup(RegisterInputModel input);
         Task<ResultValidator<List<UserViewModel>>> GetAll();
+        Task<ResultValidator<bool>> ResetPassword(ResetPasswordInputModel input);
         Task<ResultValidator<bool>> Disable(Guid id);
     }
 }

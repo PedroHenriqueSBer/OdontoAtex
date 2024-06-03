@@ -25,5 +25,9 @@ namespace Backend.Api.Controllers
         [HttpPut("delete/{id}")]
         public async Task<ResultValidator<bool>> Disable(Guid id) =>
             await _service.Disable(id);
+
+        [HttpPost("reset-password")]
+        public async Task<ResultValidator<bool>> ResetPassword([FromBody] ResetPasswordInputModel input) =>
+            await _service.ResetPassword(input);
     }
 }

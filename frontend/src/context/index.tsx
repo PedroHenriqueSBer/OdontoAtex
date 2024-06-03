@@ -2,10 +2,10 @@ import { ReactNode } from "react"
 import { ThemeProvider } from 'styled-components';
 import { createTheme, ThemeProvider as MUITheProvider } from "@mui/material";
 import light from "../styles/themes/light";
-import { LoadingHookProvider } from "./useLoading";
-import { AuthContextProvider } from "./useAuth";
-import { UserContextProvider } from "./useUsers";
-import { TourContextProvider } from "./useTour";
+import { LoadingHookProvider, useLoading } from "./useLoading";
+import { AuthContextProvider, useAuth } from "./useAuth";
+import { UserContextProvider, useUser } from "./useUsers";
+import { TourContextProvider } from "./tour";
 
 const theme = createTheme({
   palette: {
@@ -47,3 +47,5 @@ export const Providers = ({children}: ProvidersProps) => {
     </MUITheProvider>
   )
 }
+
+export {useAuth, useLoading, useUser}

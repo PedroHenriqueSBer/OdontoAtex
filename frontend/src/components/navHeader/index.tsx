@@ -1,13 +1,13 @@
-import { ButtonHeader, Header, MenuItemContent, MenuItemButton } from "./style"
+import { Header, MenuItemContent, MenuItemButton } from "./style"
 import { Bell, UserRound, Calendar, User, LogOut, UsersRound, EllipsisVertical, NotepadText } from 'lucide-react'
 import { Dropdown } from '@mui/base/Dropdown';
 import { MenuButton } from '@mui/base/MenuButton';
 import { Menu } from '@mui/base/Menu';
-import { useAuth } from "../../context/useAuth";
 import { useNavigate } from "react-router-dom";
 import { Button, IconButton } from "@mui/material";
 import { TypeUser } from "../../types/enum";
 import { useTheme } from "styled-components";
+import { useAuth } from "../../context";
 
 
 interface NavHeaderProps{

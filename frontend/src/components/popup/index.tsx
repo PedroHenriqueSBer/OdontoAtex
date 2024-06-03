@@ -1,16 +1,6 @@
 import { Button, Modal } from "@mui/material"
-import { IModalProps } from "../../types/props"
 import { ButtonContent, Container, Content } from "./style"
-
-type PopupProps = IModalProps & {
-  title: string
-  icon?: any
-  isNotDenied?: boolean
-  description: string
-  error?: boolean
-  onConfirm: () => void
-  onDenied: () => void
-}
+import { PopupProps } from "props"
 
 export const Popup = ({
   isOpen,

@@ -13,7 +13,7 @@ def complete_form(driver: Chrome, data: list[dict], submitId: str):
     sleep(5)
   driver.find_element(By.ID, submitId).click()
 
-def find_errors_form(driver: Chrome, validator: list[dict], submitId: str):
+def find_errors_form(driver: Chrome, validator: list[dict], submitId: str,isRefresh :bool = False):
   from utils.utils import wait, log
   for item in validator:
     complete_form(driver,item['formData'],submitId)
@@ -32,5 +32,6 @@ def find_errors_form(driver: Chrome, validator: list[dict], submitId: str):
         log(item['log_success'])
       else:
         log(item['log_error'],True)
-    driver.refresh()
+    if isRefresh:
+      driver.refresh()
     sleep(10)

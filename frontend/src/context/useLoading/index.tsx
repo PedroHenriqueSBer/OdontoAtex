@@ -1,16 +1,10 @@
+import { IProviderProps, LoadingHookProps } from "props";
 import { createContext, useContext, useState } from "react";
-import { IProviderProps } from "../types/props";
-import { LoadingScreen } from "../components/loadingScreen";
-
-
-interface LoadingHookProps {
-  isLoading: boolean,
-  setIsLoading: (value: boolean) => void
-}
+import { Containter } from "./style";
 
 const LoadingHook = createContext({} as LoadingHookProps)
 
-export const LoadingHookProvider = ({children} : IProviderProps) => {
+export const LoadingHookProvider = ({children}: IProviderProps) => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -19,7 +13,11 @@ export const LoadingHookProvider = ({children} : IProviderProps) => {
       isLoading,
       setIsLoading
     }}>
-      <LoadingScreen isLoading={isLoading} />
+      {isLoading &&
+        <Containter>
+          <span />
+        </Containter>
+      }
       {children}
     </LoadingHook.Provider>
   )

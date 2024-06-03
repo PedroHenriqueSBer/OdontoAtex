@@ -3,12 +3,11 @@ import { TypeUser } from "../../types/enum"
 import { useForm, Controller } from "react-hook-form"
 import * as yup from 'yup'
 import { useState } from "react"
-import { ISignupInputModels } from "../../types/inputModels"
+import { ISignupInputModels } from "inputModels"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { Popup } from "../popup"
-import { useUser } from "../../context/useUsers"
-import { userController } from "../../controllers/userController"
-import { useLoading } from "../../context/useLoading"
+import { useUser, useLoading } from "../../context"
+import { userController } from "../../controllers"
 
 export const FormCreateUser = () => {
 

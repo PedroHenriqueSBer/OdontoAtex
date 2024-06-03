@@ -2,19 +2,18 @@ import { useEffect, useState } from "react";
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ISigninInputModels } from "../../types/inputModels";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/useAuth";
-import { useLoading } from "../../context/useLoading";
-import { authController } from "../../controllers/authController";
 import { Button, ButtonLink, Container, Content, Fieldset, Helpertext, Main, Sidebar } from "./style";
 import { Eye, EyeOff, Info, Lock, Mail } from "lucide-react";
-import { Popup } from "../../components/popup";
-import { NavHeader } from "../../components/navHeader";
+import { NavHeader, Popup, RecoverPassword } from "../../components";
+import { useAuth, useLoading } from "../../context";
+import { ISigninInputModels } from "inputModels";
+import { authController } from "../../controllers";
 
 export const Signin = () => {
 
   const [isOpenDialog, setIsOpenDialog] = useState(false);
+  const [isOpenRefresh, setIsOpenRefresh] = useState(false);
   const [messageApi, setMessageApi] = useState<string>("");
   const [showPassowrd, setShowPassowrd] = useState<boolean>(false);
   const { setIsLoading } = useLoading();
@@ -120,7 +119,7 @@ export const Signin = () => {
                 }
               />
               
-              <ButtonLink type="button">Redefinir Senha?</ButtonLink>
+              <ButtonLink type="button" onClick={() => setIsOpenRefresh(true)} id="resetPasswordBtn">Redefinir Senha?</ButtonLink>
             </div>
             <Button type="submit" primary id="loginBtn">Entrar</Button>
           </Main>
@@ -135,6 +134,10 @@ export const Signin = () => {
           description={messageApi}
           error
           isNotDenied
+        />
+        <RecoverPassword 
+          isOpen={isOpenRefresh}
+          onClose={() => setIsOpenRefresh(false)}
         />
       </Container>
     </>

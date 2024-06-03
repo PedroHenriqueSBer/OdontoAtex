@@ -1,7 +1,7 @@
-import { ISignupInputModels } from "../types/inputModels";
-import { api } from "../service/api";
-import { resolveResponse } from "../utils";
-import { IUser } from "../types/models";
+import { ISignupInputModels } from "inputModels"
+import { IUser } from "models"
+import { api } from "../../service/api"
+import { resolveResponse } from "../../utils"
 
 const route = 'User'
 
@@ -17,8 +17,13 @@ const Disabled = (id: string) =>
   new Promise<boolean>((resolve,reject)=>
     api.put(`${route}/delete/${id}`).then(({data})=> resolveResponse<boolean>(resolve,reject,data)).catch(()=>reject("Erro interno")))
 
+const ResetPassword = (password: string, email: string) => 
+  new Promise<boolean>((resolve,reject)=>
+    api.post(`${route}/reset-password`, {password,email}).then(({data})=> resolveResponse<boolean>(resolve,reject,data)).catch(()=>reject("Erro interno")))
+
 export const userController = {
   Signup,
   GetAll,
-  Disabled
+  Disabled,
+  ResetPassword
 }

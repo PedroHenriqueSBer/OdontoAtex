@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { IProviderProps } from "../types/props";
-import { IUser } from "../types/models";
-import { userController } from "../controllers/userController";
+import { userController } from "../../controllers";
+import { IUser } from "models";
+import { IProviderProps } from "props";
 
 interface UsersContextProps {
   users: IUser[]

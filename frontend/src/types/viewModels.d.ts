@@ -1,7 +1,9 @@
-import { IUser } from "./models";
-
-export interface ILoginViewModel {
-  token: string,
-  user: IUser,
-  refreshToken: string
+declare module 'viewModels' {
+  export interface ILoginViewModel {
+    token: string,
+    user: import('models').IUser,
+    refreshToken: string
+  }
 }
+
+
