@@ -17,8 +17,8 @@ declare module 'inputModels' {
     description: string
   }
   export interface IResetPasswordInputModel {
-    confirmPassword: string,
-    password: string,
+    confirmNewPassword: string,
+    newPassword: string,
     code: string
   }
 }

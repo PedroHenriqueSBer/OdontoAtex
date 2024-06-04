@@ -5,5 +5,5 @@ class mui_input:
     self.driver = driver
     self.element = driver.find_element(by, value)
   def write(self, value):
-    self.driver.execute_script('arguments[0].setAttribute("value","")',self.element)
+    self.element.clear()
     self.element.send_keys(value)

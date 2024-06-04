@@ -83,6 +83,7 @@ class EmailServices:
     self.driver.execute_script('arguments[0].click()',self.driver.find_elements(By.CSS_SELECTOR,'tr')[1])
     sleep(5)
     code = self.driver.find_element(By.CLASS_NAME,'content').find_element(By.CSS_SELECTOR,'h4').text
+    self.driver.find_element(By.ID,'back').click()
     self.driver.switch_to.window(self.driver.window_handles[0])
     return code
     

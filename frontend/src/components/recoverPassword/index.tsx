@@ -93,14 +93,14 @@ export const RecoverPassword = ({
 
   const [defaultValues] = useState<IResetPasswordInputModel>({
     code: '',
-    password: '',
-    confirmPassword: ''
+    newPassword: '',
+    confirmNewPassword: ''
   })
 
   const schema = yup.object<IResetPasswordInputModel>().shape({
     code: yup.string().required('campo necessário'),
-    password: yup.string().required('campo necessário').min(3,'precisa de 3 caracteres no mínimo'),
-    confirmPassword: yup.string().required('campo necessário')
+    newPassword: yup.string().required('campo necessário').min(3,'precisa de 3 caracteres no mínimo'),
+    confirmNewPassword: yup.string().required('campo necessário')
   })
 
   const { 
@@ -118,12 +118,12 @@ export const RecoverPassword = ({
       setError('code',{message: 'Código inválido'})
       return
     }
-    if(input.confirmPassword !== input.password){
-      setError('confirmPassword',{message: 'As senhas não conhecidem'})
+    if(input.confirmNewPassword !== input.newPassword){
+      setError('confirmNewPassword',{message: 'As senhas não conhecidem'})
       return
     }
     setIsLoading(true)
-    userController.ResetPassword(input.password, email)
+    userController.ResetPassword(input.newPassword, email)
       .then((b) => {
         if(b){
           setTitle('Sucesso')
@@ -182,14 +182,14 @@ export const RecoverPassword = ({
                   </Grid>
                   <Grid item xs={12}>
                     <Controller
-                      name="password"
+                      name="newPassword"
                       control={control} 
                       render={({field}) => 
                         <TextField 
                           label='Senha'
                           fullWidth
-                          error={!!errors.password?.message}
-                          helperText={errors.password?.message}
+                          error={!!errors.newPassword?.message}
+                          helperText={errors.newPassword?.message}
                           {...field}
                         />
                       }
@@ -197,14 +197,14 @@ export const RecoverPassword = ({
                   </Grid>
                   <Grid item xs={12}>
                     <Controller
-                      name="confirmPassword"
+                      name="confirmNewPassword"
                       control={control} 
                       render={({field}) => 
                         <TextField 
                           label='Confirmar senha'
                           fullWidth
-                          error={!!errors.confirmPassword?.message}
-                          helperText={errors.confirmPassword?.message}
+                          error={!!errors.confirmNewPassword?.message}
+                          helperText={errors.confirmNewPassword?.message}
                           {...field}
                         />
                       }
