@@ -27,9 +27,9 @@ export const HomeImage = styled.div`
   }
   height: 40rem;
   background-size: cover;
-  background-image: url('https://github.com/PedroHenriqueSBer/OdontoAtex/blob/HomePage/frontend/src/assets/backgroundHomeMobile.png?raw=true');
+  background-image: url('/assets/backgroundHomeMobile.png');
   @media (min-width: 900px) {
-    background-image: url('https://github.com/PedroHenriqueSBer/OdontoAtex/blob/HomePage/frontend/src/assets/backgroundHome.png?raw=true');
+    background-image: url('/assets/backgroundHome.png');
   }
   h1{
     color: ${({theme}) => theme.colors.primary};

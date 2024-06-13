@@ -60,7 +60,7 @@ export const NavHeader = ({
       <Header position={position}>
         <div className="desktop">
           <button id="navigateHome" onClick={() => navigate('/')}>
-            <img className="logo" src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/TypeUser/frontend/src/assets/unifenas.png?raw=true" alt="Logo da Unifenas" />
+            <img className="logo" src="/assets/unifenas.png" alt="Logo da Unifenas" />
           </button>
           {isTokenValid &&
             options.filter(o => o.enable).map(({icon: Icon,name,route,classname}, index) => 
@@ -73,7 +73,7 @@ export const NavHeader = ({
         </div>
         <div className="mobile">
           <button onClick={() => navigate('/')}>
-            <img className="logo" src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/TypeUser/frontend/src/assets/icon.png?raw=true" alt="Logo da BiteByte" />
+            <img className="logo" src="/assets/icon.png" alt="Logo da BiteByte" />
           </button>
         </div>
         {isTokenValid ?
@@ -84,7 +84,7 @@ export const NavHeader = ({
                   <Bell width={19} height={19} />
                 </IconButton>
                 <Dropdown>
-                  <MenuButton className="btnProfile"><img src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/TypeUser/frontend/src/assets/userImage.png?raw=true" alt="" /></MenuButton>
+                  <MenuButton className="btnProfile"><img src="/assets/userImage.png" alt="" /></MenuButton>
                   <Menu>
                     <MenuItemContent>
                       <MenuItemButton className="first" variant="default"><User width={16} height={16} />Perfill</MenuItemButton>

@@ -8,7 +8,7 @@ export const Container = styled.div`
   align-items: center;
   @media (min-width: 800px) {
     background-size: cover;
-    background-image: url('https://github.com/PedroHenriqueSBer/OdontoAtex/blob/Signin-and-Signup-Page/frontend/src/assets/backgroundSignup.png?raw=true');
+    background-image: url('/assets/backgroundSignup.png');
   }
 `
 export const Content = styled.div`

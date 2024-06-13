@@ -18,7 +18,7 @@ export const Home = () => {
           </div>
         </HomeImage>
         <HomeContent>
-          <img src="https://github.com/PedroHenriqueSBer/OdontoAtex/blob/HomePage/frontend/src/assets/icon.png?raw=true" alt="" />
+          <img src="/assets/icon.png" alt="" />
           <h1>É Bem Simples!</h1>
           <span>
             Uma soluçao fácil e intuitiva de gerenciamento de <br /> triagens, agendamentos, criação e edição dos clientes <br /> da unifenas!
