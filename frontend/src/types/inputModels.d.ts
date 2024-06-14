@@ -21,4 +21,23 @@ declare module 'inputModels' {
     newPassword: string,
     code: string
   }
+  export interface ICreatePatientInputModel{
+      name: string,
+      profession: string,
+      cpf: string,
+      rg: string,
+      father?: string,
+      mother?: string,
+      phone: string,
+      regionalHealthCard: string,
+      nationalHealthCard: string,
+      dateOfBirth: string,
+      placeOfBirth: string,
+      state: string,
+      address: string,
+      number: string,
+      neighborhood: string,
+      city: string,
+      zipCode: string
+  }
 }

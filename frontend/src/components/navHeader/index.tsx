@@ -27,7 +27,7 @@ export const NavHeader = ({
   const options = [
     {
       classname: 'patient',
-      route: '/',
+      route: '/patients',
       icon: UserRound,
       name: 'Pacientes',
       enable: true
