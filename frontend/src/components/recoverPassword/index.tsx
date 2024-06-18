@@ -83,7 +83,7 @@ export const RecoverPassword = ({
   onClose
 }: IModalProps) => {
 
-  const { user, isTokenValid } = useAuth()
+  useAuth()
 
   const [code,setCode] = useState<string | null>(null)
   const [email,setEmail] = useState<string>('')

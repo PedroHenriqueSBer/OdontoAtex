@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material"
 import { NavHeader } from "../../components/navHeader"
 import { Containter, HomeContent, HomeFooter, HomeImage } from "./style"
 import { Mail, Phone } from "lucide-react"

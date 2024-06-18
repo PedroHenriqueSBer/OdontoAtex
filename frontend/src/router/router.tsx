@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { Auth, AuthAdm } from "./auth"
+import { AuthAdm } from "./auth"
 import { Home, Signin, Users } from "../pages"
 
 export const Router = () => {

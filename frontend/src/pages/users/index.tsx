@@ -46,6 +46,7 @@ export const Users = () => {
   useEffect(()=>{
     update()
     setSelectedUsers(users)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   
   return (
