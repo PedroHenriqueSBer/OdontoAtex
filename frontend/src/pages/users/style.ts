@@ -11,12 +11,10 @@ export const Containter = styled.div`
 `
 
 export const Content = styled.div`
-  height: fit-content;
   padding: 1rem;
   background: ${({theme}) => theme.colors.white};
   border-radius: 0.3rem;
   box-shadow: 0 0 5px #0233734d;
-  max-height: 25.5rem;
   overflow: auto;
 `
 
@@ -62,4 +60,10 @@ export const CardUser = styled.div`
       flex-direction: column;
     }
   }
+`
+
+export const InfoContent = styled.div`
+  overflow: auto;
+  padding: 1rem;
+  max-height: 35vh;
 `

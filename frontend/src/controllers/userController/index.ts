@@ -1,6 +1,6 @@
 import { ISignupInputModels } from "inputModels"
 import { IUser } from "models"
-import { api } from "../../service/api"
+import { api } from "../../service"
 import { resolveResponse } from "../../utils"
 
 const route = 'User'

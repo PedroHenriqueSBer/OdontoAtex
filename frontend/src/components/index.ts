@@ -1,3 +1,4 @@
+import { DropDown } from "./dropDown";
 import { FormCreateUser } from "./formCreateUser";
 import { NavHeader } from "./navHeader";
 import { Popup } from "./popup";
@@ -8,4 +9,5 @@ export {
   RecoverPassword,
   Popup,
   NavHeader,
+  DropDown
 }

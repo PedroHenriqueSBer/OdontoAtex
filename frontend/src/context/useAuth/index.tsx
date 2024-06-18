@@ -30,6 +30,8 @@ export const AuthContextProvider = ({children} : IProviderProps) => {
         setUser(response.user)
         setToken(response.token)
         setRefreshToken(response.refreshToken)
+        console.log(response)
+        console.log(jwtDecode(response.token))
       }).catch(()=>{
         logout()
       })

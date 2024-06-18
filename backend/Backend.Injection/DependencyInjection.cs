@@ -45,7 +45,6 @@ namespace Backend.Injection
                .AddOptions()
                .AddHttpContextAccessor();
 
-
             if (!string.IsNullOrEmpty(_settings?.AUTH_SECRET))
             {
                 var key = Encoding.ASCII.GetBytes(_settings.AUTH_SECRET);

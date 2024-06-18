@@ -43,4 +43,18 @@ declare module 'props' {
     code: string | null
     setEmail: (value: string) => void
   }
+  export interface IDropDownOptions {
+    classname?: string,
+    onClick: () => void,
+    icon: any,
+    name: string,
+    enable: boolean,
+    variant: 'warning' | 'default'
+  }
+  export interface IDropDownProps {
+    children: import('react').ReactNode
+    options: IDropDownOptions[]
+    marginX: string
+    marginY: string
+  }
 }

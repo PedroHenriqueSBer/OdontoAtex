@@ -32,7 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-ApplicationInjection.Injections(app);
+await ApplicationInjection.Injections(app);
 
 app.UseCors("AllowAll");
 

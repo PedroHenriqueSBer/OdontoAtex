@@ -1,9 +1,9 @@
 import { Grid, IconButton, Input, Tooltip, Typography } from "@mui/material"
-import { CardUser, Containter, Content } from "./style"
+import { CardUser, Containter, Content, InfoContent } from "./style"
 import { TypeUser } from "../../types/enum"
 import { FormCreateUser, NavHeader } from "../../components"
 import { Ban, Check, Eye, Search } from "lucide-react"
-import { useUser } from "../../context"
+import { useLoading, useUser } from "../../context"
 import { IUser } from "models"
 import { useEffect, useState } from "react"
 import { useTheme } from "styled-components"
@@ -11,6 +11,7 @@ import { userController } from "../../controllers"
 
 export const Users = () => {
 
+  const { setIsLoading } = useLoading()
   const {users, update} = useUser()
   const [selectedUsers, setSelectedUsers] = useState<IUser[]>([])
   const [search, setSearch] = useState<string>('')
@@ -24,13 +25,18 @@ export const Users = () => {
       : "Professor"
 
   const disable = (user: IUser) => {
-    userController.Disabled(user.id).then(()=>{
-      setSelectedUsers(selectedUsers.map(u => {
-        if(u.id === user.id)
-          u.disabled = !u.disabled
-        return u
-      }))
-    })
+    setIsLoading(true)
+    userController.Disabled(user.id)
+      .then(()=>{
+        setSelectedUsers(selectedUsers.map(u => {
+          if(u.id === user.id)
+            u.disabled = !u.disabled
+          return u
+        }))
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   useEffect(()=>{
@@ -80,27 +86,33 @@ export const Users = () => {
                       onChange={({target: {value}}) => setSearch(value)}
                     />
                   </Grid>
-                  {selectedUsers.map(u => 
-                    <Grid key={u.id} item xs={12} lg={6}>
-                      <CardUser>
-                        <div className="content">
-                          <div>
-                            <h4>{u.name}</h4>
-                            <h5>{retType(u.type)}</h5>
-                          </div>
-                        </div>
-                        <div className="content">
-                          <Tooltip placement="top" arrow title="Ver Perfil">
-                            <IconButton color="primary"><Eye/></IconButton>
-                          </Tooltip>
-                          <Tooltip placement="top" arrow title={u.disabled? 'Desabilitado' : 'Habilitado'}>
-                            <IconButton onClick={() => disable(u)} color={u.disabled? 'error' : 'success'}>{u.disabled? <Ban/> : <Check/>} </IconButton>
-                          </Tooltip>
-                        </div>
-                      </CardUser>
-                    </Grid>
-                  )}
-                </Grid>
+                  <Grid item xs={12}>
+                    <InfoContent>
+                      <Grid container spacing={2}>
+                        {selectedUsers.map(u => 
+                          <Grid key={u.id} item xs={12} lg={6}>
+                            <CardUser>
+                              <div className="content">
+                                <div>
+                                  <h4>{u.name}</h4>
+                                  <h5>{retType(u.type)}</h5>
+                                </div>
+                              </div>
+                              <div className="content">
+                                <Tooltip placement="top" arrow title="Ver Perfil">
+                                  <IconButton color="primary"><Eye/></IconButton>
+                                </Tooltip>
+                                <Tooltip placement="top" arrow title={u.disabled? 'Desabilitado' : 'Habilitado'}>
+                                  <IconButton onClick={() => disable(u)} color={u.disabled? 'error' : 'success'}>{u.disabled? <Ban/> : <Check/>} </IconButton>
+                                </Tooltip>
+                              </div>
+                            </CardUser>
+                          </Grid>
+                        )}
+                      </Grid>
+                    </InfoContent>
+                  </Grid>
+                  </Grid>
               </Content>
             </Grid>
           </Grid>
