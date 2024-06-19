@@ -21,4 +21,9 @@ declare module 'inputModels' {
     newPassword: string,
     code: string
   }
+  export interface ILogInputModel {
+    title: string,
+    message: string,
+    type: import('./enum').TypeLog,
+  }
 }

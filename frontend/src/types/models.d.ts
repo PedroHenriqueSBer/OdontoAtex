@@ -7,4 +7,12 @@ declare module 'models' {
     type: import('./enum').TypeUser,
     disabled: boolean,
   }
+  export interface ILog{
+    id: string,
+    title: string,
+    message: string,
+    type: import('./enum').TypeLog,
+    createdBy: IUser,
+    createdAt: Date
+  }
 }

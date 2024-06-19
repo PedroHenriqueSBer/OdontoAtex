@@ -1,5 +1,5 @@
 import { Button, Grid, MenuItem, Select, TextField, Typography } from "@mui/material"
-import { TypeUser } from "../../types/enum"
+import { TypeLog, TypeUser } from "../../types/enum"
 import { useForm, Controller } from "react-hook-form"
 import * as yup from 'yup'
 import { useState } from "react"
@@ -7,7 +7,7 @@ import { ISignupInputModels } from "inputModels"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { Popup } from "../popup"
 import { useUser, useLoading } from "../../context"
-import { userController } from "../../controllers"
+import { logController, userController } from "../../controllers"
 
 export const FormCreateUser = () => {
 
@@ -47,13 +47,19 @@ export const FormCreateUser = () => {
     resolver: yupResolver(schema)
   })
 
+  const retType = (type: TypeUser) => 
+    type === TypeUser.SECRETARY
+      ? "Secretaria"
+      : type === TypeUser.STUDENT
+      ? "Estudante"
+      : "Professor"
+
   const onSubmit = (input: ISignupInputModels) => {
     if(input.type === TypeUser.STUDENT){
       if(input.number === undefined){
         setError('number',{message: 'Campo nescessário'})
         return
       }
-      console.log(input.number?.length)
       if(input.number?.length !== 10){
         setError('number',{message: 'Número inválido'})
         return
@@ -70,6 +76,11 @@ export const FormCreateUser = () => {
         .then(response => {
           reset(defaultValues)
           setUsers([response,...users])
+          logController.insert({
+            message: `Usuário ${response.name} criado`,
+            title: `Usuário ${response.name} do tipo ${retType(response.type)} foi criado no dia ${new Date(Date.now()).getDate()}`,
+            type: TypeLog.SUCCESS
+          }).then(()=>{})
         })
         .catch(setApiMessage)
         .finally(()=>{
@@ -82,6 +93,11 @@ export const FormCreateUser = () => {
         .then(response => {
           reset(defaultValues)
           setUsers([response,...users])
+          logController.insert({
+            title: `Usuário ${response.name} criado`,
+            message: `Usuário ${response.name} do tipo ${retType(response.type)} foi criado`,
+            type: TypeLog.SUCCESS
+          }).then(()=>{})
         })
         .catch(setApiMessage)
         .finally(()=>{

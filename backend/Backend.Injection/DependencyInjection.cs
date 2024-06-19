@@ -33,8 +33,9 @@ namespace Backend.Injection
             services
                 .AddScoped<IUserService, UserService>()
                 .AddScoped<ISendEmailService, SendEmailService>()
+                .AddScoped<ILogService, LogService>()
                 .AddScoped<IAuthService, AuthService>();
-
+          
             services.AddDbContext<MysqlContext>(options =>
             {
                 options.UseMySQL(connectionString);

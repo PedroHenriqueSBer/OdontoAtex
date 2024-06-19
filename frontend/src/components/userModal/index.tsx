@@ -1,18 +1,19 @@
-import { Button, Modal } from "@mui/material"
+import { Grid, Modal, Typography } from "@mui/material"
+import { Container } from "./style"
+import { IUserModalProps } from "props"
+import { TypeUser } from "../../types/enum"
 
-import { PopupProps } from "props"
-import { ButtonContent, Container, Content } from "./style"
-
-export const Popup = ({
+export const UserModal = ({
   isOpen,
   onClose,
-  title,
-  isNotDenied,
-  description,
-  icon: Icon,
-  onConfirm,
-  onDenied
-}: PopupProps) => {
+  user
+}: IUserModalProps) => {
+  const retType = (type: TypeUser) => 
+    type === TypeUser.SECRETARY
+      ? "Secretaria"
+      : type === TypeUser.STUDENT
+      ? "Estudante"
+      : "Professor"
   return (
     <Modal
       open={isOpen}
@@ -25,17 +26,24 @@ export const Popup = ({
         justifyContent: 'center'
       }}
       >
-        <Container error>
-          <h1>{Icon && <Icon width={18} height={18} />} {title}</h1>
-          <Content id="popupText">
-            {description}
-          </Content>
-          <ButtonContent>
-            <Button onClick={onConfirm} id="confirmPopUp">Confirmar</Button>
-            {isNotDenied !== true &&
-              <Button color="error" onClick={onDenied}>Negar</Button>
-            }
-          </ButtonContent>
+        <Container>
+          <Grid container spacing={1}>
+            <Grid item xs={12} md={10}>
+              <Typography variant="h5" component="p" color="primary">{user.name}</Typography>
+            </Grid>
+            <Grid item xs={12} md={2}>
+              <Typography variant="subtitle1" component="p">{retType(user.type)}</Typography>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h6" component="p" color="primary">Email</Typography>
+              <Typography variant="subtitle1" component="p">{user.email}</Typography>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h6" component="p" color="primary">Ativo</Typography>
+              <Typography variant="subtitle1" component="p">{user.disabled? 'inativo' : 'ativo'}</Typography>
+            </Grid>
+          </Grid>
+          
         </Container>
     </Modal>
   )

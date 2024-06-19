@@ -1,13 +1,14 @@
 import { Grid, IconButton, Input, Tooltip, Typography } from "@mui/material"
 import { CardUser, Containter, Content, InfoContent } from "./style"
-import { TypeUser } from "../../types/enum"
-import { FormCreateUser, NavHeader } from "../../components"
+import { TypeLog, TypeUser } from "../../types/enum"
+import { FormCreateUser, LogCard, NavHeader, UserModal } from "../../components"
 import { Ban, Check, Eye, Search } from "lucide-react"
 import { useLoading, useUser } from "../../context"
-import { IUser } from "models"
+import { ILog, IUser } from "models"
 import { useEffect, useState } from "react"
 import { useTheme } from "styled-components"
-import { userController } from "../../controllers"
+import { logController, userController } from "../../controllers"
+import { useWebSocket } from "../../hooks"
 
 export const Users = () => {
 
@@ -15,7 +16,15 @@ export const Users = () => {
   const {users, update} = useUser()
   const [selectedUsers, setSelectedUsers] = useState<IUser[]>([])
   const [search, setSearch] = useState<string>('')
+  const [logs, setLogs] = useState<ILog[]>([])
+  const [selectedUser, setSelectedUser] = useState<IUser | null>(null)
   const theme = useTheme()
+
+  useWebSocket<ILog>({
+    url: 'logs',
+    onMessage: (log) => setLogs([log,...logs]),
+    onError: (error) => console.log(error)
+  })
 
   const retType = (type: TypeUser) => 
     type === TypeUser.SECRETARY
@@ -33,6 +42,11 @@ export const Users = () => {
             u.disabled = !u.disabled
           return u
         }))
+        logController.insert({
+          title: `Usuário ${user.name} foi ${user.disabled ? 'desabilitado' : 'habilitado'}`,
+          message: ``,
+          type: TypeLog.SUCCESS
+        })
       })
       .finally(() => {
         setIsLoading(false)
@@ -46,6 +60,7 @@ export const Users = () => {
   useEffect(()=>{
     update()
     setSelectedUsers(users)
+    logController.getAll().then(setLogs)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   
@@ -65,6 +80,17 @@ export const Users = () => {
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <Typography component='p' variant="h5" color='primary'>Ações dos Usuários</Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <InfoContent>
+                      <Grid container spacing={2}>
+                        {logs.map(l => 
+                          <Grid key={l.id} item xs={12}>
+                            <LogCard log={l} />
+                          </Grid>
+                        )}
+                      </Grid>
+                    </InfoContent>
                   </Grid>
                 </Grid>
               </Content>
@@ -101,7 +127,7 @@ export const Users = () => {
                               </div>
                               <div className="content">
                                 <Tooltip placement="top" arrow title="Ver Perfil">
-                                  <IconButton color="primary"><Eye/></IconButton>
+                                  <IconButton onClick={() => setSelectedUser(u)} color="primary"><Eye/></IconButton>
                                 </Tooltip>
                                 <Tooltip placement="top" arrow title={u.disabled? 'Desabilitado' : 'Habilitado'}>
                                   <IconButton onClick={() => disable(u)} color={u.disabled? 'error' : 'success'}>{u.disabled? <Ban/> : <Check/>} </IconButton>
@@ -119,6 +145,14 @@ export const Users = () => {
           </Grid>
         </div>
       </Containter>
+      {selectedUser &&
+        <UserModal 
+          isOpen={!!selectedUser}
+          onClose={() => setSelectedUser(null)}
+          user={selectedUser}
+        />
+      }
+
     </>
   )
 }

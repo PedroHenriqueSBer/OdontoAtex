@@ -7,8 +7,9 @@ import { IResetPasswordInputModel, ISendCodeEmailInputModel } from "inputModels"
 import { Controller, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from 'yup'
-import { emailController, userController } from "../../controllers"
+import { emailController, logController, userController } from "../../controllers"
 import { Popup } from "../popup"
+import { TypeLog } from "../../types/enum"
 
 const SendEmail = ({setCode, code, setEmail}: ISendEmailProps) => {
   const { user, isTokenValid } = useAuth()
@@ -83,8 +84,6 @@ export const RecoverPassword = ({
   onClose
 }: IModalProps) => {
 
-  useAuth()
-
   const [code,setCode] = useState<string | null>(null)
   const [email,setEmail] = useState<string>('')
   const [title,setTitle] = useState<string>('')
@@ -129,6 +128,11 @@ export const RecoverPassword = ({
           setTitle('Sucesso')
           setDescription('Senha alterada com sucesso')
           onClose()
+          logController.insert({
+            message: `Usuário de email ${email} teve a senha alterada`,
+            title: `Usuário do email ${email} teve a senha alterada`,
+            type: TypeLog.SUCCESS
+          })
         }
         else{
           setTitle('Erro')

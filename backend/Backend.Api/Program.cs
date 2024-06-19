@@ -1,4 +1,7 @@
+using Backend.Api.Managers;
+using Backend.Api.Middlewares;
 using Backend.Aplication;
+using Backend.Domain.interfaces;
 using Backend.Injection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSingleton<ISocketManager, SocketManager>();
 builder.Services.AddSwaggerGen();
 
 DependencyInjection.Injections(builder.Services, builder.Configuration.GetConnectionString("Mysql") ?? "");
@@ -32,9 +36,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-await ApplicationInjection.Injections(app);
 
 app.UseCors("AllowAll");
+
+app.UseWebSockets();
+
+app.UseMiddleware<SocketMiddleware>();
+
+await ApplicationInjection.Injections(app);
 
 app.UseHttpsRedirection();
 

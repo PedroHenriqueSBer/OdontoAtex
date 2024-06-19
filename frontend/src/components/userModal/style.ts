@@ -1,17 +1,17 @@
 import styled from "styled-components";
 
-export const Container = styled.div<{error?: boolean}>`
-  width: fit-content;
+export const Container = styled.div`
   padding: 1rem;
-  border-radius: 1rem;
+  border-radius: 8px;
   background-color: ${({theme}) => theme.colors.white};
   box-shadow: 0 0 20px #00000038;
   min-width: 14rem;
+  max-width: 80%;
   h1{
     margin: 0;
     font-size: 1.3rem;
     align-items: center;
-    color: ${({theme, error}) => error? theme.colors.red : theme.colors.text};
+    color: ${({theme}) => theme.colors.text};
     display: flex;
     gap: 0.3rem;
   }

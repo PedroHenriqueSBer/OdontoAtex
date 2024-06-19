@@ -7,9 +7,15 @@ declare module 'props' {
     message: string,
     error: boolean
   }
+  export interface ILogCardProps {
+    log: import('models').ILog
+  }
   export interface IModalProps {
     isOpen: boolean
     onClose: () => void
+  }
+  type IUserModalProps = IModalProps & {
+    user: import('models').IUser
   }
   type PopupProps = IModalProps & {
     title: string
