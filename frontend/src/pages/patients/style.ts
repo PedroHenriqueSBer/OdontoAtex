@@ -47,6 +47,15 @@ export const SearchContainer = styled.div`
   }
 `;
 
+export const AddButton =styled.div `
+  .add-button{
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 0.11115rem 0.5rem;
+    margin-right: 0;
+  }
+`
+
 export const PatientsContainer = styled.div`
   display: flex;
   flex-direction: column;
