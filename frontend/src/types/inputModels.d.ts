@@ -40,4 +40,9 @@ declare module 'inputModels' {
       city: string,
       zipCode: string
   }
+  export interface ILogInputModel {
+    title: string,
+    message: string,
+    type: import('./enum').TypeLog,
+  }
 }

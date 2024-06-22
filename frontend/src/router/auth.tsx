@@ -20,6 +20,7 @@ export const Auth = ({children}: AuthProps) => {
   useEffect(() => {
     if(!isTokenValid)
       navigate('/signin')
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[isTokenValid])
   
   return (
@@ -39,6 +40,7 @@ export const AuthAdm = ({children}: AuthProps) => {
       navigate('/signin')
     if(user.type !== TypeUser.ADM)
       navigate('/')
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[isTokenValid])
   
   return (

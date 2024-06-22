@@ -7,9 +7,15 @@ declare module 'props' {
     message: string,
     error: boolean
   }
+  export interface ILogCardProps {
+    log: import('models').ILog
+  }
   export interface IModalProps {
     isOpen: boolean
     onClose: () => void
+  }
+  type IUserModalProps = IModalProps & {
+    user: import('models').IUser
   }
   type PopupProps = IModalProps & {
     title: string
@@ -42,5 +48,19 @@ declare module 'props' {
     setCode: (value: string) => void
     code: string | null
     setEmail: (value: string) => void
+  }
+  export interface IDropDownOptions {
+    classname?: string,
+    onClick: () => void,
+    icon: any,
+    name: string,
+    enable: boolean,
+    variant: 'warning' | 'default'
+  }
+  export interface IDropDownProps {
+    children: import('react').ReactNode
+    options: IDropDownOptions[]
+    marginX: string
+    marginY: string
   }
 }

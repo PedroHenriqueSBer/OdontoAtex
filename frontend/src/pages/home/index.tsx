@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material"
 import { NavHeader } from "../../components/navHeader"
 import { Containter, HomeContent, HomeFooter, HomeImage } from "./style"
 import { Mail, Phone } from "lucide-react"
@@ -14,7 +13,7 @@ export const Home = () => {
       <Containter id="homePage">
         <HomeImage>
           <div>
-            <h1>Bem Vindo ao Bite&Byte</h1>
+            <h1>Bem Vindo ao Byte&Bite</h1>
           </div>
         </HomeImage>
         <HomeContent>

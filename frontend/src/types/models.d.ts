@@ -30,4 +30,12 @@ declare module 'models' {
       createdAt: Date,
       createdBy: IUser, 
   }
+  export interface ILog{
+    id: string,
+    title: string,
+    message: string,
+    type: import('./enum').TypeLog,
+    createdBy: IUser,
+    createdAt: Date
+  }
 }

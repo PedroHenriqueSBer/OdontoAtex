@@ -1,13 +1,12 @@
-import { Header, MenuItemContent, MenuItemButton } from "./style"
+import { Header } from "./style"
 import { Bell, UserRound, Calendar, User, LogOut, UsersRound, EllipsisVertical, NotepadText } from 'lucide-react'
-import { Dropdown } from '@mui/base/Dropdown';
-import { MenuButton } from '@mui/base/MenuButton';
-import { Menu } from '@mui/base/Menu';
 import { useNavigate } from "react-router-dom";
 import { Button, IconButton } from "@mui/material";
 import { TypeUser } from "../../types/enum";
 import { useTheme } from "styled-components";
 import { useAuth } from "../../context";
+import { IDropDownOptions } from "props";
+import { DropDown } from "../dropDown";
 
 
 interface NavHeaderProps{
@@ -24,34 +23,38 @@ export const NavHeader = ({
 
   const { logout, user, isTokenValid } = useAuth()
 
-  const options = [
+  const options: IDropDownOptions[] = [
     {
       classname: 'patient',
-      route: '/patients',
+      onClick: () => navigate('/patients'),
       icon: UserRound,
       name: 'Pacientes',
-      enable: true
+      enable: true,
+      variant: 'default'
     },
     {
       classname: 'calendar',
-      route: '/',
+      onClick: () => navigate('/'),
       icon: Calendar,
       name: 'Agenda',
-      enable: true
+      enable: true,
+      variant: 'default'
     },
     {
       classname: 'screening',
-      route: '/',
+      onClick: () => navigate('/'),
       icon: NotepadText,
       name: 'triagem',
-      enable: [TypeUser.STUDENT, TypeUser.TEACHER].includes(user.type)
+      enable: [TypeUser.STUDENT, TypeUser.TEACHER].includes(user.type),
+      variant: 'default'
     },
     {
       classname: 'user',
-      route: '/users',
+      onClick: () => navigate('/users'),
       icon: UsersRound,
       name: 'Usuários',
-      enable: [TypeUser.ADM].includes(user.type)
+      enable: [TypeUser.ADM].includes(user.type),
+      variant: 'default'
     }
   ]
 
@@ -63,8 +66,8 @@ export const NavHeader = ({
             <img className="logo" src="/assets/unifenas.png" alt="Logo da Unifenas" />
           </button>
           {isTokenValid &&
-            options.filter(o => o.enable).map(({icon: Icon,name,route,classname}, index) => 
-              <Button key={index} id={classname} className={classname} style={{gap: '0.4rem'}} onClick={()=>navigate(route)}>
+            options.filter(o => o.enable).map(({icon: Icon,name,onClick,classname}, index) => 
+              <Button key={index} id={classname} className={classname} style={{gap: '0.4rem'}} onClick={onClick}>
                 <Icon width={19} height={19} />
                 {name}
               </Button>
@@ -83,26 +86,46 @@ export const NavHeader = ({
                 <IconButton color="primary">
                   <Bell width={19} height={19} />
                 </IconButton>
-                <Dropdown>
-                  <MenuButton className="btnProfile"><img src="/assets/userImage.png" alt="" /></MenuButton>
-                  <Menu>
-                    <MenuItemContent>
-                      <MenuItemButton className="first" variant="default"><User width={16} height={16} />Perfill</MenuItemButton>
-                      <MenuItemButton id="btnlogout" className="last" onClick={()=>{logout();navigate('/signin')}} variant="warning"><LogOut width={16} height={16}/>Sair</MenuItemButton>
-                    </MenuItemContent>
-                  </Menu>
-                </Dropdown>
+                <div className="desktop">
+                  <DropDown options={[
+                    {
+                      enable: true,
+                      icon: User,
+                      name: 'Perfill',
+                      onClick: () => navigate('/'),
+                      variant: 'default'
+                    },
+                    {
+                      enable: true,
+                      icon: LogOut,
+                      name: 'Sair',
+                      onClick: logout,
+                      variant: 'warning'
+                    }
+                  ]} marginX="-2.5rem" marginY="8rem">
+                    <img src="/assets/userImage.png" alt="" />
+                  </DropDown>
+                </div>
                 <div className="mobile patient calendar user">
-                  <Dropdown>
-                    <MenuButton><EllipsisVertical width={19} height={19} style={{color: theme.colors.primary}}/></MenuButton>
-                    <Menu>
-                      <MenuItemContent>
-                        {options.filter(o => o.enable).map(({icon: Icon,name,route}, index, self) => 
-                          <MenuItemButton key={index} className={index === 0 ? 'first' : (self.length-1) === index ? 'last' : ''} variant="default" onClick={()=>navigate(route)}><Icon width={16} height={16} />{name}</MenuItemButton>
-                        )}
-                      </MenuItemContent>
-                    </Menu>
-                  </Dropdown>
+                  <DropDown options={[
+                    ...options,
+                    {
+                      enable: true,
+                      icon: User,
+                      name: 'Perfill',
+                      onClick: () => navigate('/'),
+                      variant: 'default'
+                    },
+                    {
+                      enable: true,
+                      icon: LogOut,
+                      name: 'Sair',
+                      onClick: logout,
+                      variant: 'warning'
+                    }
+                  ]} marginX="-4.9rem" marginY="13.5rem">
+                    <EllipsisVertical width={19} height={19} style={{color: theme.colors.primary}}/>
+                  </DropDown>
                 </div>
               </div>
             </>

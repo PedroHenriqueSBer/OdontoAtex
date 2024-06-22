@@ -1,12 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { Home } from "../pages/home"
-import { Auth, AuthAdm } from "./auth"
-import { Signin } from "../pages/signin/Signin"
-import { Users } from "../pages/users"
-import { Patients } from "../pages/patients"
-import { CreatePatients } from "../pages/createpatients"
-
-
+import { AuthAdm, Auth } from "./auth"
+import { Home, Signin, Users,CreatePatients,Patients} from "../pages"
 
 export const Router = () => {
   return (

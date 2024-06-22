@@ -1,5 +1,5 @@
 import { ISendCodeEmailInputModel } from "inputModels"
-import { api } from "../../service/api"
+import { api } from "../../service"
 import { resolveResponse } from "../../utils"
 
 const route = 'SendEmail'

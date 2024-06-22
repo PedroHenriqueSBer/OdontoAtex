@@ -35,8 +35,9 @@ namespace Backend.Injection
                 .AddScoped<IUserService, UserService>()
                 .AddScoped<ISendEmailService, SendEmailService>()
                 .AddScoped<IPatientServices, PatientServices>()
+                .AddScoped<ILogService, LogService>()
                 .AddScoped<IAuthService, AuthService>();
-
+          
             services.AddDbContext<MysqlContext>(options =>
             {
                 options.UseMySQL(connectionString);
@@ -46,7 +47,6 @@ namespace Backend.Injection
             services
                .AddOptions()
                .AddHttpContextAccessor();
-
 
             if (!string.IsNullOrEmpty(_settings?.AUTH_SECRET))
             {
