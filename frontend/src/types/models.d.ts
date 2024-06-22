@@ -38,4 +38,14 @@ declare module 'models' {
     createdBy: IUser,
     createdAt: Date
   }
+  export interface IAddress {
+    cep: string
+    state: string
+    uf: string
+    city: string
+    neighborhood: string
+    street: string
+    number: string
+    complement?: string
+  }
 }

@@ -1,3 +1,4 @@
 import { api } from './api'
+import {consultCep } from './cep'
 
-export { api }
+export { api, consultCep }

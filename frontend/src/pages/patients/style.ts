@@ -5,15 +5,23 @@ export const Container = styled.div`
   flex-direction: column;
   padding: 2rem;
   background: #E9F2F1;
+
+  @media (max-width: 600px) {
+    padding: 1rem;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 export const FiltersContainer = styled.div`
   background: white;
-  padding: 1rem;
+  padding: 0rem 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  margin-bottom: 1rem;
+  height: 100%;
 
   @media (max-width: 600px) {
     padding: 0.5rem;
@@ -28,9 +36,6 @@ export const SearchContainer = styled.div`
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1rem;
-  margin-left: auto;
-  width: calc(100% - 1rem);
 
   @media (max-width: 600px) {
     flex-direction: column;
@@ -47,15 +52,6 @@ export const SearchContainer = styled.div`
   }
 `;
 
-export const AddButton =styled.div `
-  .add-button{
-    flex-shrink: 0;
-    white-space: nowrap;
-    padding: 0.11115rem 0.5rem;
-    margin-right: 0;
-  }
-`
-
 export const PatientsContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -64,10 +60,12 @@ export const PatientsContainer = styled.div`
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  overflow: auto;
+  height: 25rem;
+
 
   @media (max-width: 600px) {
-    padding: 0.5rem;
+    padding: 0.1rem;
   }
 `;
 
@@ -79,6 +77,7 @@ export const PatientCard = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 
   @media (max-width: 600px) {
     flex-direction: column;
@@ -102,10 +101,11 @@ export const PatientCard = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    gap: 0.5rem;
+    width: 100%;
 
     @media (max-width: 600px) {
       align-items: flex-start;
-      width: 100%;
       flex-direction: row;
       justify-content: space-between;
     }
@@ -119,40 +119,5 @@ export const PatientCard = styled.div`
     @media (max-width: 600px) {
       width: 48%;
     }
-  }
-`;
-
-export const FormGroupContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-
-  @media (max-width: 600px) {
-    flex-direction: column;
-    gap: 1rem;
-  }
-`;
-
-export const FilterSection = styled.div`
-  flex: 1;
-  min-width: 200px;
-
-  @media (max-width: 600px) {
-    width: 100%;
-  }
-`;
-
-export const SearchSection = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-left: 1rem;
-
-  @media (max-width: 600px) {
-    width: 100%;
-    margin-left: 0;
   }
 `;

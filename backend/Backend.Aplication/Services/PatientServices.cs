@@ -5,9 +5,11 @@ using Backend.Domain.Entities;
 using Backend.Domain.Services;
 using Backend.Domain.Validators;
 using Backend.Infra.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,13 +21,17 @@ namespace Backend.Aplication.Services
 
         private readonly IBaseRepository<User> _userepository;
 
-
+        private readonly Guid userId;
         private readonly IBaseRepository<Patient> _repository;
         public PatientServices(
             IBaseRepository<Patient> repository,
-            IBaseRepository<User> userepository
+            IBaseRepository<User> userepository,
+            IHttpContextAccessor context
             )
         {
+            var user = context?.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier);
+            if (user != null) userId = Guid.Parse(user.Value);
+
             _repository = repository;
             _userepository = userepository;
         }
@@ -52,11 +58,11 @@ namespace Backend.Aplication.Services
                 ZipCode = input.ZipCode,
                 DateOfBirth = input.DateOfBirth,
                 CreatedAt = DateTime.UtcNow,
-                CreatedById = new Guid("00000000-0000-0000-0000-000000000002"),
+                CreatedById = userId
             };
 
             patient.Id = await _repository.Insert(patient);
-            patient.CreatedBy = await _userepository.Get(new Guid("00000000-0000-0000-0000-000000000002"));
+            patient.CreatedBy = await _userepository.Get(userId);
             return ResultService<PatientViewModel>.Ok(PatientViewModel.FromModel(patient));
         }
 
