@@ -30,7 +30,7 @@ export const NavHeader = ({
       icon: UserRound,
       name: 'Pacientes',
       enable: true,
-      variant: 'default'
+      variant: 'default',
     },
     {
       classname: 'calendar',

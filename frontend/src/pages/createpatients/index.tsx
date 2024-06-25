@@ -196,13 +196,14 @@ export const CreatePatients = () => {
                       <Controller
                         control={control}
                         name="rg"
-                        render={({ field }) =>
+                        render={({ field : {value,...field}}) =>
                           <TextField
                             fullWidth
                             label="RG:"
                             {...field}
                             error={!!errors.rg?.message}
                             helperText={errors.rg?.message}
+                            value={toPattern(value, MASK_CPF)}
                           />
                         }
                       />
