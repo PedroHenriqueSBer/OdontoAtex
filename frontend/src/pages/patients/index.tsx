@@ -14,8 +14,10 @@ import {
 } from "@mui/material";
 import { Container, FiltersContainer, SearchContainer, PatientsContainer, PatientCard } from "./style";
 import { NavHeader } from "../../components";
+import { useNavigate } from "react-router-dom";
 
 export const Patients = () => {
+  const navigate = useNavigate()
   return (
     <>
       <NavHeader />
@@ -57,7 +59,7 @@ export const Patients = () => {
                         <MenuItem value={30}>Joãozinho</MenuItem>
                       </Select>
                     </FormControl>
-                    <Button className="add-button" variant="contained" size="medium">Adicionar +</Button>
+                    <Button className="add-button" variant="contained" size="medium" onClick={() => navigate('/CreatePatients')}>Adicionar +</Button>
                   </Box>
                 </SearchContainer>
               </Grid>
