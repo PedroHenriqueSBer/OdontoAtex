@@ -15,8 +15,19 @@ import {
 import { Container, FiltersContainer, SearchContainer, PatientsContainer, PatientCard } from "./style";
 import { NavHeader } from "../../components";
 import { useNavigate } from "react-router-dom";
+import { ILog, IPatient } from "models";
+import { useEffect, useState } from "react";
+import { useWebSocket } from "../../hooks";
+import { patientController } from "../../controllers";
 
 export const Patients = () => {
+  
+  const [selectedPatients, setSelectedPatients] = useState<IPatient[]>([])
+  /*useEffect(()=>{
+    patientController.GetAll()
+    .then((data)=>{console.log(data)})
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])*/
   const navigate = useNavigate()
   return (
     <>

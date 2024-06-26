@@ -19,5 +19,9 @@ namespace Backend.Api.Controllers
         [HttpPost]
         public async Task<ResultValidator<PatientViewModel>> Signup([FromBody] PatientInputModel input) =>
             await _service.Create(input);
+
+        [HttpGet("get-all")]
+        public async Task<ResultValidator<List<PatientViewModel>>> GetAll() =>
+            await _service.GetAll();
     }
 }

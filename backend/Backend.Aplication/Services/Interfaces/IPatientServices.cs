@@ -12,6 +12,6 @@ namespace Backend.Aplication.Services.Interfaces
     public interface IPatientServices
     {
         Task<ResultValidator<PatientViewModel>> Create(PatientInputModel input);
-
+        Task<ResultValidator<List<PatientViewModel>>> GetAll();
     }
 }
