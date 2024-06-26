@@ -1,5 +1,5 @@
 import { Header } from "./style"
-import { Bell, UserRound, Calendar, User, LogOut, UsersRound, EllipsisVertical, NotepadText } from 'lucide-react'
+import { Bell, UserRound, Calendar, User, LogOut, UsersRound, EllipsisVertical, NotepadText, BookOpenCheck } from 'lucide-react'
 import { useNavigate } from "react-router-dom";
 import { Button, IconButton } from "@mui/material";
 import { TypeUser } from "../../types/enum";
@@ -54,6 +54,14 @@ export const NavHeader = ({
       icon: UsersRound,
       name: 'Usuários',
       enable: [TypeUser.ADM].includes(user.type),
+      variant: 'default'
+    },
+    {
+      classname: 'medicalRecord',
+      onClick: () => navigate('/patients'),
+      icon: BookOpenCheck,
+      name: 'Prontuários',
+      enable: [TypeUser.TEACHER].includes(user.type),
       variant: 'default'
     }
   ]
