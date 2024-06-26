@@ -2,6 +2,7 @@
 using Backend.Aplication.Services.Interfaces;
 using Backend.Aplication.ViewModels;
 using Backend.Domain.Entities;
+using Backend.Domain.Enum;
 using Backend.Domain.Services;
 using Backend.Domain.Validators;
 using Backend.Infra.Repositories.Interfaces;
@@ -34,6 +35,11 @@ namespace Backend.Aplication.Services
 
             _repository = repository;
             _userepository = userepository;
+        }
+        public async Task<ResultValidator<List<PatientViewModel>>> GetAll()
+        {
+            var users = await _repository.Select();
+            return ResultService<List<PatientViewModel>>.Ok(users.Select(PatientViewModel.FromModel).ToList());
         }
 
         public async Task<ResultValidator<PatientViewModel>> Create (PatientInputModel input)

@@ -13,5 +13,5 @@ namespace Backend.Aplication.InputModels
         public string Title { get; set; }
         public string Message { get; set; }
         public TypeLog Type { get; set; }
-    }
+    }   
 }
