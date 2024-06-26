@@ -79,8 +79,8 @@ export const Patients = () => {
                       <Typography variant="body2">📞 (35) 94002-8922 | CPF: 123.456.789-10</Typography>
                     </Box>
                     <Box display="flex" gap={1} flexWrap="wrap" width="100%">
-                      <Button className="edit-button" variant="outlined" size="small">Editar ✏️</Button>
-                      <Button className="overview-button" variant="contained" size="small">Visão Geral</Button>
+                      <Button className="edit-button" variant="outlined" size="small" onClick={() => navigate("/EditPatients")}>Editar ✏️</Button>
+                      <Button className="overview-button" variant="contained" size="small" onClick={() => navigate("/PatientsOverview")}>Visão Geral</Button>
                     </Box>
                   </Box>
                 </PatientCard>
