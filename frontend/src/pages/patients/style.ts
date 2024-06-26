@@ -18,10 +18,10 @@ export const Container = styled.div`
 
 export const FiltersContainer = styled.div`
   background: white;
-  padding: 1rem;  /* Aumentei o padding */
+  padding: 0rem 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 70%;
+  height: 100%;
 
   @media (max-width: 600px) {
     padding: 0.5rem;
@@ -34,9 +34,8 @@ export const SearchContainer = styled.div`
   justify-content: space-between;
   background: white;
   padding: 1rem;
-  border-radius: 10px;
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1rem;  /* Adicionei margem inferior */
 
   @media (max-width: 600px) {
     flex-direction: column;
@@ -64,8 +63,9 @@ export const PatientsContainer = styled.div`
   overflow: auto;
   height: 25rem;
 
+
   @media (max-width: 600px) {
-    padding: 0.5rem;  /* Aumentei o padding */
+    padding: 0.1rem;
   }
 `;
 
@@ -78,7 +78,6 @@ export const PatientCard = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-bottom: 1rem;  /* Adicionei margem inferior */
 
   @media (max-width: 600px) {
     flex-direction: column;
