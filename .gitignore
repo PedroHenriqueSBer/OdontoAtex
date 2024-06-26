@@ -3,3 +3,6 @@
 ################################################################################
 
 /backend/Backend.Api/appsettings.Development.json
+/tests/logs
+/tests/venv
+__pycache__/

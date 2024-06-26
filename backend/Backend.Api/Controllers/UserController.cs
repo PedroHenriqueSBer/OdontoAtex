@@ -2,6 +2,7 @@
 using Backend.Aplication.Services.Interfaces;
 using Backend.Aplication.ViewModels;
 using Backend.Domain.Validators;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace Backend.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService _service;
@@ -25,5 +27,10 @@ namespace Backend.Api.Controllers
         [HttpPut("delete/{id}")]
         public async Task<ResultValidator<bool>> Disable(Guid id) =>
             await _service.Disable(id);
+
+        [HttpPost("reset-password")]
+        [AllowAnonymous]
+        public async Task<ResultValidator<bool>> ResetPassword([FromBody] ResetPasswordInputModel input) =>
+            await _service.ResetPassword(input);
     }
 }

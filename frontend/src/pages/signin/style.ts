@@ -6,6 +6,10 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (min-width: 800px) {
+    background-size: cover;
+    background-image: url('/assets/backgroundSignup.png');
+  }
 `
 export const Content = styled.div`
   @media (min-width: 800px) {

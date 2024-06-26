@@ -6,20 +6,23 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 500;
     ::-webkit-scrollbar {
       width: 8px;
-      background-color: ${({ theme }) => theme.colors.white};
       border-radius: 10px;
+      position: absolute;
     }
     ::-webkit-scrollbar:horizontal {
       height: 5px;
+      position: absolute;
     }
     ::-webkit-scrollbar-track,
     ::-webkit-scrollbar-track-horizontal {
       border-radius: 10px;
+      position: absolute;
     }
     ::-webkit-scrollbar-thumb,
     ::-webkit-scrollbar-thumb:horizontal {
       background-color: ${({ theme }) => theme.colors.primary};
       border-radius: 10px;
+      position: absolute;
     }
   }
 

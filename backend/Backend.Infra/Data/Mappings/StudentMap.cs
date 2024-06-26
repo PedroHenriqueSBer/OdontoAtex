@@ -9,6 +9,8 @@ namespace Backend.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<Student> builder)
         {
             builder.ToTable("Student");
+
+            builder.HasData(SeedData.Students);
         }
     }
 }

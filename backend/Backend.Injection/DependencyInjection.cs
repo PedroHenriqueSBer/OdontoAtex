@@ -27,13 +27,17 @@ namespace Backend.Injection
             services
                 .AddScoped<IBaseRepository<Student>, BaseRepository<Student>>()
                 .AddScoped<IBaseRepository<Log>, BaseRepository<Log>>()
+                .AddScoped<IBaseRepository<Patient>, BaseRepository<Patient>>()
                 .AddScoped<IBaseRepository<RefreshToken>, BaseRepository<RefreshToken>>()
                 .AddScoped<IBaseRepository<User>, BaseRepository<User>>();
             
             services
                 .AddScoped<IUserService, UserService>()
+                .AddScoped<ISendEmailService, SendEmailService>()
+                .AddScoped<IPatientServices, PatientServices>()
+                .AddScoped<ILogService, LogService>()
                 .AddScoped<IAuthService, AuthService>();
-
+          
             services.AddDbContext<MysqlContext>(options =>
             {
                 options.UseMySQL(connectionString);
@@ -43,7 +47,6 @@ namespace Backend.Injection
             services
                .AddOptions()
                .AddHttpContextAccessor();
-
 
             if (!string.IsNullOrEmpty(_settings?.AUTH_SECRET))
             {
